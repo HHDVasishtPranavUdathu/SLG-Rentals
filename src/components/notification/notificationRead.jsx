@@ -36,6 +36,8 @@ const GetNotifications = () => {
 
     const handleDeleteSuccess = (deletedId) => {
         setNotifications(notifications.filter((n) => n.notification_Id !== deletedId));
+        setBannerMessage("Notification deleted successfully!");
+        setShowBanner(true);
     };
 
     useEffect(() => {

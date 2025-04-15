@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Banner from "../Banner"; // Import the Banner component
 
 const NOTIFICATION_API_URL = "https://localhost:7150/api/Notifications";
 const REGISTRATIONS_API_URL = "https://localhost:7150/api/Registrations";
@@ -12,6 +13,8 @@ const PostNotification = () => {
         notification_Descpirtion: "",
     });
     const [receivers, setReceivers] = useState([]); // State for dropdown options
+    const [bannerMessage, setBannerMessage] = useState(""); // State for banner messages
+    const [showBanner, setShowBanner] = useState(false); // State to show/hide banner
 
     useEffect(() => {
         const fetchReceivers = async () => {
@@ -25,6 +28,8 @@ const PostNotification = () => {
                 setReceivers(response.data);
             } catch (error) {
                 console.error("Error fetching receivers:", error.message);
+                setBannerMessage("Failed to load receivers. Please try again.");
+                setShowBanner(true); // Show error message in the banner
             }
         };
         fetchReceivers();
@@ -33,7 +38,8 @@ const PostNotification = () => {
     const postNotification = async (e) => {
         e.preventDefault();
         if (!formData.sendersId || !formData.receiversId || !formData.notification_Descpirtion.trim()) {
-            alert("All fields are required!");
+            setBannerMessage("All fields are required!");
+            setShowBanner(true); // Show error message
             return;
         }
         try {
@@ -47,7 +53,8 @@ const PostNotification = () => {
                     },
                 }
             );
-            alert("Notification posted successfully!");
+            setBannerMessage("Notification posted successfully!");
+            setShowBanner(true); // Show success message
             setFormData({
                 sendersId: sendersId,
                 receiversId: "",
@@ -55,12 +62,20 @@ const PostNotification = () => {
             });
         } catch (error) {
             console.error("Error posting notification:", error.message);
-            alert("Failed to post notification. Please try again.");
+            setBannerMessage("Failed to post notification. Please try again.");
+            setShowBanner(true); // Show error message
         }
+    };
+
+    const closeBanner = () => {
+        setShowBanner(false); // Close the banner
     };
 
     return (
         <div style={{ maxWidth: "500px", margin: "auto", padding: "20px" }}>
+            {/* Banner Component */}
+            {showBanner && <Banner message={bannerMessage} onClose={closeBanner} />}
+
             <h3 style={{ textAlign: "center", marginBottom: "20px" }}>Post a New Notification</h3>
             <form onSubmit={postNotification} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 {/* Dropdown for Receivers */}
@@ -136,69 +151,3 @@ const PostNotification = () => {
 };
 
 export default PostNotification;
-
-
-
-
-
-// import React, { useState } from "react";
-// import axios from "axios";
-
-// const API_URL = "https://localhost:7150/api/Notifications";
-
-// const PostNotification = () => {
-//     const sendersId = localStorage.getItem('user_id')
-//     const [formData, setFormData] = useState({
-//         sendersId: sendersId,
-//         receiversId: "",
-//         notification_Descpirtion: "",
-//     });
-
-//     const postNotification = async (e) => {
-//         e.preventDefault();
-//         if (!formData.sendersId || !formData.receiversId || !formData.notification_Descpirtion.trim()) {
-//             alert("All fields are required!");
-//             return;
-//         }
-//         try {
-//             const token = localStorage.getItem('token');
-//             await axios.post(
-//                 API_URL,
-//                 formData,
-//                 {
-//                     headers: {
-//                         Authorization: `Bearer ${token}`, // Attach the token
-//                     },
-//                 }
-//             ); alert("Notification posted successfully!");
-//             setFormData({ sendersId: "", receiversId: "", notification_Descpirtion: "" });
-//         } catch (error) {
-//             console.error("Error posting notification:", error.message);
-//             alert("Failed to post notification. Please try again.");
-//         }
-//     };
-
-//     return (
-//         <div>
-//             <h3>Post a New Notification</h3>
-//             <form onSubmit={postNotification}>
-//                 <input
-//                     type="text"
-//                     placeholder="Receiver ID"
-//                     value={formData.receiversId}
-//                     onChange={(e) => setFormData({ ...formData, receiversId: e.target.value })}
-//                     required
-//                 />
-//                 <textarea
-//                     placeholder="Message"
-//                     value={formData.notification_Descpirtion}
-//                     onChange={(e) => setFormData({ ...formData, notification_Descpirtion: e.target.value })}
-//                     required
-//                 ></textarea>
-//                 <button type="submit">Post Notification</button>
-//             </form>
-//         </div>
-//     );
-// };
-
-// export default PostNotification;

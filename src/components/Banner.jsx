@@ -1,6 +1,13 @@
-import React from "react";
-
+import React, { useEffect } from "react";
 const Banner = ({ message, onClose }) => {
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            onClose();
+        }, 5000);
+
+        return () => clearTimeout(timer); 
+    }, [onClose]);
+    
     return (
         <div style={{
             position: "fixed",
