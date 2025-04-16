@@ -1,0 +1,65 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './Login.css'; // Import the CSS file
+ 
+const Login = () => {
+    const [user_id, setUserId] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+ 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('https://localhost:7150/api/Auth/login', {
+                user_id,
+                password,
+            });
+            const { token } = response.data;
+           console.log("after login"+response.data);
+            // Store JWT token in localStorage
+            localStorage.setItem('token', token);
+            localStorage.setItem('user_id', user_id);
+           
+            
+            navigate('/');
+        } catch (error) {
+           
+            console.error('Login failed:', error.response ? error.response.data : error.message);
+            alert('Invalid credentials!');
+        }
+    };
+ 
+    return (
+        <div className="login-container">
+            <div className="login-image">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp" alt="Login" />
+            </div>
+            <div className="login-form">
+                <h2>Login</h2>
+                <form onSubmit={handleLogin}>
+                    <input
+                        type="text"
+                        placeholder="User_Id"
+                        value={user_id}
+                        onChange={(e) => setUserId(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <button type="submit">Login</button>
+                    <a href="#!" className="forgot-password" onClick={() => navigate('/ResetPassword')}>Forgot password?</a>
+                   
+                    <p>Don't have an Account? <a href="/Registration" className="sign-up">Sign up</a></p>
+                </form>
+            </div>
+        </div>
+    );
+};
+ 
+export default Login;
