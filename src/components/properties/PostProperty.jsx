@@ -17,7 +17,7 @@ const PostProperty = () => {
   const [properties, setProperties] = useState([]);
   const [errors, setErrors] = useState({});
   const [bannerMessage, setBannerMessage] = useState("");
-  const [userId, setUserId] = useState(localStorage.getItem('Userid') || '');
+  const [userId, setUserId] = useState(localStorage.getItem('user_id') || '');
   const token = localStorage.getItem('token'); // Retrieve token from local storage
 
   useEffect(() => {
@@ -155,7 +155,6 @@ const PostProperty = () => {
               <p>Owner ID: {property.owner_Id}</p>
               <p>Owner Name: {property.owner_Name}</p>
               <p>Phone Number: {property.owner_PhoneNumber}</p>
-              <p>Signature: {property.owner_Signature}</p>
             </div>
           ))
         ) : (

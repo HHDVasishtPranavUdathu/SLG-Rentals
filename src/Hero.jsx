@@ -52,7 +52,7 @@ export default function Hero() {
           </div>
         </div>
       </section>
-      <div id="not"><GetProperties/></div>
+      {/* <div id="not"><GetProperties/></div> */}
     </main>
   );
 }

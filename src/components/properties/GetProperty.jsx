@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./GetProperties.css"; // Import the CSS file
+import { useNavigate } from 'react-router-dom';
 
 const API_URL = "https://localhost:7150/api/Properties";
 
 const GetProperties = () => {
   const [property, setProperty] = useState([]);
-  const [userId, setUserId] = useState(localStorage.getItem('Userid') || '');
+  const [userId, setUserId] = useState(localStorage.getItem('user_id') || '');
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
   const propertiesPerPage = 6; // Number of properties per page
 
   useEffect(() => {
     if (userId.startsWith("T")) {
+    // if (userId) {
       loadProperty();
     }
   }, [userId]);
@@ -72,7 +75,7 @@ const GetProperties = () => {
               <p>Owner Name: {pr.owner_Name}</p>
               <p>Phone Number: {pr.owner_PhoneNumber}</p>
               <p>Signature: {pr.owner_Signature}</p>
-              <button onClick={() => deleteProperty(pr.property_Id)}>Delete</button>
+              <button onClick={() =>navigate('/lease/tenant')}>apply</button>
             </div>
           </div>
         ))}
