@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link } from "react-router-dom"; 
 import "./Hero.css";
-import GetNotifications from "./components/notification/notificationRead"
 
-export default function Hero() {
+export default function Hero2() {
   return (
     <main className="container">
       <header className="header">
@@ -51,7 +50,7 @@ export default function Hero() {
           </div>
         </div>
       </section>
-      <div id="not"><GetNotifications/></div>
+      {/* <div id="not"><GetNotifications/></div> */}
     </main>
   );
 }

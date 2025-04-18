@@ -12,9 +12,8 @@ const NotificationCRUD = () => {
             <header className="header">
                 <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
                 <div className="header-links">
-                    <Link to="/login" className="link-default">Login</Link>
-                    <Link to="/register" className="link-default">Register</Link>
-                    <Link to="/properties" className="link-primary">See Properties ↓</Link>
+                    <Link to="/lease/tenant" className="link-default">Lease</Link>
+                    <Link to="/Maintainance" className="link-default">Maintainance</Link>
                     <NotiBtn />
                 </div>
             </header>

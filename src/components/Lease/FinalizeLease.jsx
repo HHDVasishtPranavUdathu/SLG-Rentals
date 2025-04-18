@@ -6,7 +6,6 @@ const API_URL = "https://localhost:7150/api/lease";
 
 const FinalizeLease = () => {
     const [leaseId, setLeaseId] = useState(""); // State for selected leaseId
-    const [ownerId, setOwnerId] = useState(""); // State for ownerId
     const [signature, setSignature] = useState(""); // State for signature
     const [leases, setLeases] = useState([]); // State for dropdown options
     const [bannerMessage, setBannerMessage] = useState(""); // State for banner message
@@ -17,7 +16,7 @@ const FinalizeLease = () => {
         const fetchLeases = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const ownerId = localStorage.getItem("user_id"); // Assuming ownerId is stored in localStorage
+                const ownerId = localStorage.getItem("user_id"); // Automatically retrieve ownerId from localStorage
 
                 if (!token || !ownerId) {
                     setBannerMessage("You are not authenticated or owner ID is missing.");
@@ -45,8 +44,9 @@ const FinalizeLease = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem("token");
+            const ownerId = localStorage.getItem("user_id"); // Automatically retrieve ownerId from localStorage
 
-            if (!token) {
+            if (!token || !ownerId) {
                 setBannerMessage("You are not authenticated. Please log in.");
                 setShowBanner(true);
                 return;
@@ -116,27 +116,11 @@ const FinalizeLease = () => {
                         </option>
                         {leases.map((lease) => (
                             <option key={lease.leaseId} value={lease.leaseId}>
-                                Lease ID:{lease.leaseId} -Tenant ID: {lease.id} -Property ID: {lease.property_Id}
+                                Lease ID: {lease.leaseId} - Tenant ID: {lease.id} - Property ID: {lease.property_Id}
                             </option>
                         ))}
                     </select>
                 </div>
-
-                {/* Input for Owner ID */}
-                <input
-                    type="text"
-                    placeholder="Owner ID"
-                    value={ownerId}
-                    onChange={(e) => setOwnerId(e.target.value)}
-                    style={{
-                        width: "97%",
-                        padding: "10px",
-                        borderRadius: "5px",
-                        border: "1px solid #ddd",
-                        fontSize: "16px",
-                    }}
-                    required
-                />
 
                 {/* Input for Signature */}
                 <input

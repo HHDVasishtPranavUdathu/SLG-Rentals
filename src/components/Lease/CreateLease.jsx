@@ -4,7 +4,6 @@ import Banner from "../Banner"; // Import the Banner component
 const API_URL = "https://localhost:7150/api/lease";
 
 const CreateLease = () => {
-    const [tenantId, setTenantId] = useState("");
     const [propertyId, setPropertyId] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
@@ -16,15 +15,16 @@ const CreateLease = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem("token");
+            const userId = localStorage.getItem("user_id"); // Automatically retrieve user_id from localStorage
 
-            if (!token) {
-                setBannerMessage("Token is missing. Please log in.");
+            if (!token || !userId) {
+                setBannerMessage("Token or User ID is missing. Please log in.");
                 setShowBanner(true);
                 return;
             }
 
             const queryParams = new URLSearchParams({
-                tenantId,
+                tenantId: userId, // Using user_id as tenantId
                 propertyId,
                 startDate,
                 endDate,
@@ -91,19 +91,6 @@ const CreateLease = () => {
                     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                 }}
             >
-                <input
-                    type="text"
-                    placeholder="Tenant ID"
-                    value={tenantId}
-                    onChange={(e) => setTenantId(e.target.value)}
-                    required
-                    style={{
-                        padding: "10px",
-                        borderRadius: "5px",
-                        border: "1px solid #ccc",
-                        fontSize: "1rem",
-                    }}
-                />
                 <input
                     type="number"
                     placeholder="Property ID"

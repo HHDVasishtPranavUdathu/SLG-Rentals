@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // React Router's hook for navigation
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const API_URL = "https://localhost:7150/api/Notifications";
@@ -7,7 +7,7 @@ const API_URL = "https://localhost:7150/api/Notifications";
 const NotiBtn = () => {
   const [topNotification, setTopNotification] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
-  const navigate = useNavigate(); // Hook to handle navigation
+  const navigate = useNavigate();
 
   const fetchTopNotification = async () => {
     const userId = localStorage.getItem("user_id");
@@ -28,7 +28,7 @@ const NotiBtn = () => {
         (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
       );
       setTopNotification(
-        sortedNotifications[0]?.notification_Descpirtion || "No new notifications"
+        sortedNotifications[0]?.sendersId + " : "+ sortedNotifications[0]?.notification_Descpirtion || "No new notifications"
       );
     } catch (error) {
       console.error("Error fetching top notification:", error.message);

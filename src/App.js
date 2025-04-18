@@ -9,6 +9,8 @@ import RegistrationForm from "./components/Login_Register/Registration";
 import PasswordReset from "./components/Login_Register/ResetPassword";
 import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import "./App.css";
+import MyProfile from "./components/MyProfile";
+import Hero2 from "./Hero2";
 
 function App() {
   return (
@@ -19,9 +21,11 @@ function App() {
         <Route path="/reg" element={<RegistrationForm />} />
         <Route path="/ResetPassword" element={<PasswordReset />} />
         
-        {/* Protected routes with role-based checks */}
+
+        <Route path="/me" element={<ProtectedRoute element={<MyProfile/>} />} />
         <Route path="/noti" element={<ProtectedRoute element={<NotificationCRUD />} />} />
         <Route path="/lease/owner" element={<ProtectedRoute element={<OwnerLease />} role="owner" />} />
+        <Route path="/o" element={<ProtectedRoute element={<Hero2 />} role="owner" />} />
         <Route path="/lease/tenant" element={<ProtectedRoute element={<TenantLease />} role="tenant" />} />
       </Routes>
     </Router>

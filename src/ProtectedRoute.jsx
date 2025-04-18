@@ -15,13 +15,13 @@ const ProtectedRoute = ({ element, role }) => {
         return <Navigate to="/login" />;
     }
 
-    // Role-based routing logic
+    
     if (role === "owner" && !userId.startsWith("O")) {
-        return <Navigate to="/" />; // Redirect unauthorized "Owner" access to home
+        return <Navigate to="/" />;
     }
 
     if (role === "tenant" && !userId.startsWith("T")) {
-        return <Navigate to="/" />; // Redirect unauthorized "Tenant" access to home
+        return <Navigate to="/" />;
     }
 
     return element; // Render the element if checks pass
