@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Import the CSS file
- 
+
 const Login = () => {
     const [user_id, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
- 
+
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
@@ -16,20 +16,25 @@ const Login = () => {
                 password,
             });
             const { token } = response.data;
-           console.log("after login"+response.data);
+            console.log("after login" + response.data);
             // Store JWT token in localStorage
             localStorage.setItem('token', token);
-            localStorage.setItem('user_id', user_id);
+            localStorage.setItem('Userid', user_id);
            
-            
-            navigate('/');
+            // Navigate based on user_id prefix
+            if (user_id.startsWith("O")) {
+                navigate('/PostProperty');
+            } else if (user_id.startsWith("T")) {
+                navigate('/GetProperties');
+            } else {
+                alert('Invalid user type!');
+            }
         } catch (error) {
-           
             console.error('Login failed:', error.response ? error.response.data : error.message);
             alert('Invalid credentials!');
         }
     };
- 
+
     return (
         <div className="login-container">
             <div className="login-image">
@@ -54,12 +59,12 @@ const Login = () => {
                     />
                     <button type="submit">Login</button>
                     <a href="#!" className="forgot-password" onClick={() => navigate('/ResetPassword')}>Forgot password?</a>
-                   
+                    
                     <p>Don't have an Account? <a href="/Registration" className="sign-up">Sign up</a></p>
                 </form>
             </div>
         </div>
     );
 };
- 
+
 export default Login;
