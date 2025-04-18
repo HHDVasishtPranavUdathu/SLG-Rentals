@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import NotiBtn from "./notification/NotiBtn";
 import axios from "axios";
 
 const MyProfile = () => {
@@ -37,15 +39,26 @@ const MyProfile = () => {
     }
 
     return (
-        <div style={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
-            <h2>My Profile</h2>
-            <div style={{ border: "1px solid #ccc", borderRadius: "8px", padding: "15px" }}>
-                <p><strong>ID:</strong> {profile.id}</p>
-                <p><strong>Name:</strong> {profile.name}</p>
-                <p><strong>Phone Number:</strong> {profile.phoneNumber}</p>
-                <p><strong>Date of Birth:</strong> {profile.d_O_B}</p>
-                <p><strong>Role:</strong> {profile.roleofUser}</p>
-                <p><strong>Signature:</strong> {profile.signature}</p>
+        <div className="container">
+            <header className="header">
+                <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
+                <div className="header-links">
+                    <Link to="/login" className="link-default">Login</Link>
+                    <Link to="/register" className="link-default">Register</Link>
+                    <Link to="/properties" className="link-primary">See Properties ↓</Link>
+                    <NotiBtn />
+                </div>
+            </header>
+            <div style={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
+                <h2>My Profile</h2>
+                <div style={{ border: "1px solid #ccc", borderRadius: "8px", padding: "15px" }}>
+                    <p><strong>ID:</strong> {profile.id}</p>
+                    <p><strong>Name:</strong> {profile.name}</p>
+                    <p><strong>Phone Number:</strong> {profile.phoneNumber}</p>
+                    <p><strong>Date of Birth:</strong> {profile.d_O_B}</p>
+                    <p><strong>Role:</strong> {profile.roleofUser}</p>
+                    <p><strong>Signature:</strong> {profile.signature}</p>
+                </div>
             </div>
         </div>
     );

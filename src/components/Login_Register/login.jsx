@@ -23,9 +23,9 @@ const Login = () => {
            
             // Navigate based on user_id prefix
             if (user_id.startsWith("O")) {
-                navigate('/PostProperty');
+                navigate('/o');
             } else if (user_id.startsWith("T")) {
-                navigate('/GetProperties');
+                navigate('/');
             } else {
                 alert('Invalid user type!');
             }
