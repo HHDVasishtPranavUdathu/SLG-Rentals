@@ -4,18 +4,50 @@ import Banner from "../Banner"; // Import the Banner component
 const API_URL = "https://localhost:7150/api/lease";
 
 const CreateLease = () => {
-    const [propertyId, setPropertyId] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [signature, setSignature] = useState("");
     const [bannerMessage, setBannerMessage] = useState(""); // State for banner message
     const [showBanner, setShowBanner] = useState(false); // State to show/hide banner
 
+    const handleStartDateChange = (e) => {
+        const selectedDate = new Date(e.target.value); // Selected start date
+        const today = new Date(); // Current date
+
+        // Reset time to avoid time mismatches
+        today.setHours(0, 0, 0, 0);
+        selectedDate.setHours(0, 0, 0, 0);
+
+        if (selectedDate < today) {
+            setBannerMessage("Start date cannot be in the past.");
+            setShowBanner(true);
+        } else {
+            setStartDate(e.target.value); // Valid date
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const today = new Date();
+        const selectedStartDate = new Date(startDate);
+        const selectedEndDate = new Date(endDate);
+
+        // Validate Start Date and End Date
+        if (selectedStartDate < today) {
+            setBannerMessage("Start date cannot be in the past.");
+            setShowBanner(true);
+            return;
+        }
+        if (selectedEndDate <= selectedStartDate) {
+            setBannerMessage("End date must be after the start date.");
+            setShowBanner(true);
+            return;
+        }
+
         try {
             const token = localStorage.getItem("token");
-            const userId = localStorage.getItem("user_id"); // Automatically retrieve user_id from localStorage
+            const userId = localStorage.getItem("user_id");
+            const prop = localStorage.getItem("prop");
 
             if (!token || !userId) {
                 setBannerMessage("Token or User ID is missing. Please log in.");
@@ -24,8 +56,8 @@ const CreateLease = () => {
             }
 
             const queryParams = new URLSearchParams({
-                tenantId: userId, // Using user_id as tenantId
-                propertyId,
+                tenantId: userId,
+                propertyId: prop,
                 startDate,
                 endDate,
                 signature,
@@ -92,23 +124,10 @@ const CreateLease = () => {
                 }}
             >
                 <input
-                    type="number"
-                    placeholder="Property ID"
-                    value={propertyId}
-                    onChange={(e) => setPropertyId(e.target.value)}
-                    required
-                    style={{
-                        padding: "10px",
-                        borderRadius: "5px",
-                        border: "1px solid #ccc",
-                        fontSize: "1rem",
-                    }}
-                />
-                <input
                     type="date"
                     placeholder="Start Date"
                     value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
+                    onChange={handleStartDateChange}
                     required
                     style={{
                         padding: "10px",

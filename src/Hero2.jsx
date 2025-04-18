@@ -8,7 +8,10 @@ export default function Hero2() {
       <header className="header">
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
         <div className="header-links">
-          <Link to="/login" className="link-default">Login</Link>
+          <Link to="/login" className="link-default" onClick={() => {
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("token");
+    }}>Logout</Link>
           <Link to="/reg" className="link-default">Register</Link>
           <Link to="/properties" className="link-primary">See Properties ↓</Link>
         </div>
@@ -50,7 +53,6 @@ export default function Hero2() {
           </div>
         </div>
       </section>
-      {/* <div id="not"><GetNotifications/></div> */}
     </main>
   );
 }

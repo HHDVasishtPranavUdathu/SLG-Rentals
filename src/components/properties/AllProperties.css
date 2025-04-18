@@ -1,0 +1,179 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Added a consistent font style */
+  }
+  
+  /* Header Styles */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+  }
+  
+  .header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .header-links {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .link-default {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+  }
+  
+  .link-default:hover {
+    text-decoration: underline;
+  }
+  
+  /* Property Container Styles */
+  .property-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* Aligns items to the start while wrapping */
+  }
+  
+  .property-card {
+    flex: 1 1 calc(25% - 20px); /* 4 cards in one row */
+    max-width: calc(25% - 20px); /* Ensures cards stay within bounds */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px; /* Slightly more padding */
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .property-card:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Added hover effect */
+  }
+  
+  .property-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .property-details {
+    padding: 10px;
+  }
+  
+  .property-details h3 {
+    margin: 0 0 10px;
+    color: #333;
+  }
+  
+  .property-details p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Form Styles */
+  .property-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .form-group input, 
+  .form-group select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-sizing: border-box;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Button Styles */
+  button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    margin: 0 5px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .property-card {
+        flex: 1 1 calc(50% - 20px); /* 2 cards per line for medium screens */
+        max-width: calc(50% - 20px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .property-card {
+        flex: 1 1 100%; /* 1 card per line for small screens */
+        max-width: 100%;
+    }
+  }
+  

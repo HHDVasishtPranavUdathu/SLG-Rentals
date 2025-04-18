@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Banner from "../Banner"; // Import the Banner component
-import './Property.css'; // Import the CSS file
+import Banner from "../Banner";
+import './Property.css';
 
 const API_URL = "https://localhost:7150/api/Properties";
 
@@ -9,16 +9,14 @@ const PostProperty = () => {
   const [formData, setFormData] = useState({
     address: "",
     description: "",
-    owner_Id: "",
     availableStatus: "false",
     owner_Signature: "",
     priceOfTheProperty: 0
   });
   const [properties, setProperties] = useState([]);
-  const [errors, setErrors] = useState({});
   const [bannerMessage, setBannerMessage] = useState("");
-  const [userId, setUserId] = useState(localStorage.getItem('user_id') || '');
-  const token = localStorage.getItem('token'); // Retrieve token from local storage
+  const userId = localStorage.getItem('user_id') || ''; // Automatically fetch owner ID
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     if (userId) {
@@ -30,7 +28,7 @@ const PostProperty = () => {
     try {
       const response = await axios.get(`${API_URL}/owner/${userId}`, {
         headers: {
-          'Authorization': `Bearer ${token}` // Add token to headers
+          'Authorization': `Bearer ${token}`
         }
       });
       setProperties(response.data);
@@ -42,10 +40,10 @@ const PostProperty = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { address, description, priceOfTheProperty, availableStatus, owner_Id, owner_Signature } = formData;
+    const { address, description, priceOfTheProperty, availableStatus, owner_Signature } = formData;
 
-    if (!address || !description || !priceOfTheProperty || !availableStatus || !owner_Id || !owner_Signature) {
-      setErrors({ form: "All fields are required." });
+    if (!address || !description || !priceOfTheProperty || !availableStatus || !owner_Signature) {
+      setBannerMessage("All fields are required."); // Show error in the banner
       return;
     }
 
@@ -55,30 +53,29 @@ const PostProperty = () => {
         description,
         priceOfTheProperty,
         availableStatus,
-        owner_Id,
+        owner_Id: userId, // Use the owner ID from localStorage
         owner_Signature
       }), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Bearer ${token}` // Add token to headers
+          'Authorization': `Bearer ${token}`
         }
       });
-      
+
       setFormData({
         address: "",
         description: "",
         priceOfTheProperty: 0,
         availableStatus: "false",
-        owner_Id: "",
         owner_Signature: ""
       });
-      setErrors({});
-      setBannerMessage("Property added successfully!");
+      setBannerMessage("Property added successfully!"); // Show success message in banner
       fetchPropertiesByUserId(userId); // Refresh properties
     } catch (error) {
       if (error.response && error.response.status === 500) {
         setBannerMessage("Property already exists!");
       } else {
+        setBannerMessage("Error saving property. Please try again."); // Show error in the banner
         console.error("Error saving property:", error.response || error.message);
       }
     }
@@ -86,64 +83,84 @@ const PostProperty = () => {
 
   return (
     <div className="container">
+      <header className="header">
+        <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
+        <div className="header-links">
+          <a href="/Property" className="link-default">
+            See Properties
+          </a>
+          <a href="/AccountInfo" className="link-default">
+            <img src="account-icon-url" alt="Account Info" className="account-icon" />
+          </a>
+          <a href="/" className="link-default">
+            Logout
+          </a>
+        </div>
+      </header>
       <h2>Property Management</h2>
-      {bannerMessage && <Banner message={bannerMessage} onClose={() => setBannerMessage("")} />}
+      {bannerMessage && <Banner message={bannerMessage} onClose={() => setBannerMessage("")} />} {/* Error/Success messages in banner */}
       {userId.startsWith("O") && (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Address"
-            value={formData.address}
-            onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-            required
-          />
-          {errors.address && <span>{errors.address}</span>}
-          <input
-            type="text"
-            placeholder="Description"
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            required
-          />
-          {errors.description && <span>{errors.description}</span>}
-          <input
-            type="number"
-            placeholder="Price"
-            value={formData.priceOfTheProperty}
-            onChange={(e) => setFormData({ ...formData, priceOfTheProperty: e.target.value })}
-            required
-          />
-          {errors.priceOfTheProperty && <span>{errors.priceOfTheProperty}</span>}
-          <select
-            value={formData.availableStatus}
-            onChange={(e) => setFormData({ ...formData, availableStatus: e.target.value })}
-            required
-          >
-            <option value="false">Not Available</option>
-            <option value="true">Available</option>
-          </select>
-          {errors.availableStatus && <span>{errors.availableStatus}</span>}
-          <input
-            type="text"
-            placeholder="Owner ID"
-            value={formData.owner_Id}
-            onChange={(e) => setFormData({ ...formData, owner_Id: e.target.value })}
-            required
-          />
-          {errors.owner_Id && <span>{errors.owner_Id}</span>}
-          <input
-            type="text"
-            placeholder="Owner Signature"
-            value={formData.owner_Signature}
-            onChange={(e) => setFormData({ ...formData, owner_Signature: e.target.value })}
-            required
-          />
-          {errors.owner_Signature && <span>{errors.owner_Signature}</span>}
+        <form onSubmit={handleSubmit} className="property-form">
+          <div className="form-group">
+            <label htmlFor="address">Address:</label>
+            <input
+              id="address"
+              type="text"
+              placeholder="Enter address"
+              value={formData.address}
+              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description:</label>
+            <input
+              id="description"
+              type="text"
+              placeholder="Enter description"
+              value={formData.description}
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="price">Price:</label>
+            <input
+              id="price"
+              type="number"
+              placeholder="Enter price"
+              value={formData.priceOfTheProperty}
+              onChange={(e) => setFormData({ ...formData, priceOfTheProperty: e.target.value })}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="availableStatus">Availability:</label>
+            <select
+              id="availableStatus"
+              value={formData.availableStatus}
+              onChange={(e) => setFormData({ ...formData, availableStatus: e.target.value })}
+              required
+            >
+              <option value="false">Not Available</option>
+              <option value="true">Available</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="ownerSignature">Owner Signature:</label>
+            <input
+              id="ownerSignature"
+              type="text"
+              placeholder="Enter owner signature"
+              value={formData.owner_Signature}
+              onChange={(e) => setFormData({ ...formData, owner_Signature: e.target.value })}
+              required
+            />
+          </div>
           <button type="submit">Add Property</button>
-          {errors.form && <span>{errors.form}</span>}
         </form>
       )}
-
+<h4>Your Properties:</h4>
       <div className="property-container">
         {properties.length > 0 ? (
           properties.map((property) => (

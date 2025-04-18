@@ -8,6 +8,14 @@
   margin: 0 auto;
 }
 
+#not{
+  padding-top: 3rem;
+}
+
+.hero-subtitle b{
+  color: #000000;
+}
+
 /* Notification button styling */
 .noti-btn {
   background-color: transparent;
@@ -43,7 +51,7 @@
 
 .header-title {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 24px;
 }
 
 .header-links {
@@ -67,7 +75,8 @@
 /* Hero section styling */
 .hero {
   text-align: center;
-  padding: 2rem 1rem;
+  height: 99vh;
+  /* padding: 1rem; */
 }
 
 .hero-title {

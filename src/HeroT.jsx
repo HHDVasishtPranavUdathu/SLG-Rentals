@@ -1,44 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link } from "react-router-dom"; 
 import "./Hero.css";
 import AllProperties from "./components/properties/AllProperties";
-import RentalTranslations from "./RentalTranslations"; // Import the RentalTranslations component
+import AvailablePropsTen from "./components/properties/AvailablePropsTen";
 
-export default function Hero() {
+export default function HeroT() {
   return (
     <main className="container">
-      {/* Header Section */}
       <header className="header">
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
         <div className="header-links">
-          <Link to="/login" className="link-default">Login</Link>
+          <Link to="/login" className="link-default" onClick={() => {
+                  localStorage.removeItem("user_id");
+                  localStorage.removeItem("token");
+              }}>Logout</Link>
           <Link to="/reg" className="link-default">Register</Link>
           <a href="#not" className="link-default">See Properties ↓</a>
         </div>
       </header>
 
-      {/* Hero Section */}
       <section className="hero">
-        {/* Dynamic Title from RentalTranslations */}
-        {/* <h3 className="hero-title"> */}
-          <RentalTranslations />
-        {/* </h3> */}
+        <h1 className="hero-title">SLG Rentals</h1>
         <p className="hero-subtitle">
-          Sri Lakshmi Ganapathi Rentals:<br />
-          <b>Not NATIONAL, It's INTERNATIONAL!</b><br />
-          Thaggede Le! 😎
+          Find the best rental properties tailored to your needs!
         </p>
 
-        {/* Call-to-Action Buttons */}
         <div className="button-group">
-          <a href="#not" className="btn-primary">See Properties ↓</a>
+           <a href="#not" className="btn-primary">See Properties ↓</a>
           <Link to="/reg" className="btn-secondary">Register</Link>
         </div>
-        <p className="hero-footer">
-          Design Resource trusted by over 1,00,000++ customers 😂🤣
-        </p>
 
-        {/* Preview Images */}
         <div className="preview-images">
           <div className="image-wrapper">
             <img
@@ -62,10 +53,10 @@ export default function Hero() {
             />
           </div>
         </div>
-
-        {/* All Properties Section */}
-        <div id="not">
-          <AllProperties />
+      <div id="not">
+        
+        <AvailablePropsTen/>
+        
         </div>
       </section>
     </main>

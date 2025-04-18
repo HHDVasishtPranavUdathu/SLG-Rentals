@@ -13,6 +13,8 @@ import MyProfile from "./components/MyProfile";
 import Hero2 from "./Hero2";
 import GetProperties from "./components/properties/GetProperty";
 import PostProperty from "./components/properties/PostProperty";
+import AllProperties from "./components/properties/AllProperties";
+import HeroT from "./HeroT";
 
 function App() {
   return (
@@ -22,15 +24,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/reg" element={<RegistrationForm />} />
         <Route path="/ResetPassword" element={<PasswordReset />} />
-        <Route path="/GetProperties" element={<GetProperties/>} />
-        <Route path="/PostProperties" element={<PostProperty/>} />
+        <Route path="/AllProperties" element={<AllProperties/>} />
+
         
 
         <Route path="/me" element={<ProtectedRoute element={<MyProfile/>} />} />
         <Route path="/noti" element={<ProtectedRoute element={<NotificationCRUD />} />} />
         <Route path="/lease/owner" element={<ProtectedRoute element={<OwnerLease />} role="owner" />} />
+        <Route path="/PostProperties" element={<ProtectedRoute element={<PostProperty />} role="owner" />} />
         <Route path="/o" element={<ProtectedRoute element={<Hero2 />} role="owner" />} />
         <Route path="/lease/tenant" element={<ProtectedRoute element={<TenantLease />} role="tenant" />} />
+        <Route path="/t" element={<ProtectedRoute element={<HeroT/>} role="tenant" />} />
+        <Route path="/GetProperties" element={<ProtectedRoute element={<GetProperties />} role="tenant" />} />
       </Routes>
     </Router>
   );

@@ -3,15 +3,18 @@ import axios from "axios";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import './Registration.css';
+import Banner from "../Banner"; 
 import { useNavigate } from 'react-router-dom';
-import Banner from "../Banner";
  
 const API_URL = "https://localhost:7150/api/Registrations";
  
 // Validation schema
 const validationSchema = yup.object({
-    id: yup.string().required("ID Should Not Be Null"),
+    id: yup.string()
+        .matches(/^\d+$/, "ID should contain only digits.")
+        .required("ID Should Not Be Null"),
     name: yup.string()
+        .matches(/^(?=.*[A-Z])[A-Za-z]+$/, "Name should contain only alphabets with at least one uppercase letter.")
         .min(4, "Name should contain a minimum length of 4 characters")
         .max(30, "Name should not exceed the maximum limit of 30 characters")
         .required("Name is required."),
@@ -27,6 +30,8 @@ const validationSchema = yup.object({
     signature: yup.string(),
     roleofUser: yup.string().required("Role of User is required.")
 });
+ 
+ 
  
 const RegistrationForm = () => {
     const [registrations, setRegistrations] = useState([]);
@@ -79,12 +84,10 @@ const RegistrationForm = () => {
                 resetForm(); // Clear form after adding
                 setBannerMessage("User registered successfully!"); // Show success message
                 setTimeout(() => {
-                    setBannerMessage(""); // Clear banner message after 6 seconds
+                    setBannerMessage("");
+                    navigate('/login')
                 }, 6000);
-                setTimeout(() => {
-                    navigate("/login"); // Redirect to /login
-                    setBannerMessage(""); // Clear banner message
-                }, 6000);
+               
             } catch (error) {
                 if (error.response && error.response.status === 500) {
                     setBannerMessage("User already exists!"); // Show user already exists message
@@ -176,7 +179,7 @@ const RegistrationForm = () => {
                 />
                 {formik.touched.password && formik.errors.password ? <div className="error">{formik.errors.password}</div> : null}
                
-                <label htmlFor="answer">Answer</label>
+                <label htmlFor="answer">Name of Your Primary School??????</label>
                 <input
                     type="text"
                     name="answer"
@@ -200,8 +203,8 @@ const RegistrationForm = () => {
                     required
                 >
                     <option value="" label="Select role" />
-                    <option value="O" label="O" />
-                    <option value="T" label="T" />
+                    <option value="O" label="Owner" />
+                    <option value="T" label="Tenant" />
                 </select>
                 {formik.touched.roleofUser && formik.errors.roleofUser ? <div className="error">{formik.errors.roleofUser}</div> : null}
                
@@ -210,6 +213,7 @@ const RegistrationForm = () => {
             </form>
         </div>
     );
+   
 };
  
 export default RegistrationForm;

@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Import the CSS file
-
+ 
 const Login = () => {
     const [user_id, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
+ 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
@@ -19,13 +19,13 @@ const Login = () => {
             console.log("after login" + response.data);
             // Store JWT token in localStorage
             localStorage.setItem('token', token);
-            localStorage.setItem('user_id', user_id);
+            localStorage.setItem('Userid', user_id);
            
             // Navigate based on user_id prefix
             if (user_id.startsWith("O")) {
-                navigate('/o');
+                navigate('/PostProperty');
             } else if (user_id.startsWith("T")) {
-                navigate('/');
+                navigate('/GetProperties');
             } else {
                 alert('Invalid user type!');
             }
@@ -34,7 +34,7 @@ const Login = () => {
             alert('Invalid credentials!');
         }
     };
-
+ 
     return (
         <div className="login-container">
             <div className="login-image">
@@ -42,6 +42,9 @@ const Login = () => {
             </div>
             <div className="login-form">
                 <h2>Login</h2>
+                <p className="info-message">
+                    If you are an owner, your ID will start with <strong>O_</strong>. If you are a tenant, your ID will start with <strong>T_</strong>.
+                </p>
                 <form onSubmit={handleLogin}>
                     <input
                         type="text"
@@ -59,12 +62,12 @@ const Login = () => {
                     />
                     <button type="submit">Login</button>
                     <a href="#!" className="forgot-password" onClick={() => navigate('/ResetPassword')}>Forgot password?</a>
-                    
-                    <p>Don't have an Account? <a href="/Registration" className="sign-up">Sign up</a></p>
+                   
+                    <p>Don't have an Account? <a href="/Reg" className="sign-up">Sign up</a></p>
                 </form>
             </div>
         </div>
     );
 };
-
+ 
 export default Login;
