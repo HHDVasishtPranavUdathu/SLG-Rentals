@@ -19,7 +19,7 @@ const Login = () => {
             console.log("after login" + response.data);
             // Store JWT token in localStorage
             localStorage.setItem('token', token);
-            localStorage.setItem('Userid', user_id);
+            localStorage.setItem('user_id', user_id);
            
             // Navigate based on user_id prefix
             if (user_id.startsWith("O")) {

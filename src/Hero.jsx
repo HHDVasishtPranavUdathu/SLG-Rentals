@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
 import "./Hero.css";
 import GetNotifications from "./components/notification/notificationRead"
+import GetProperties from "./components/properties/GetProperty";
 
 export default function Hero() {
   return (
@@ -51,7 +52,7 @@ export default function Hero() {
           </div>
         </div>
       </section>
-      <div id="not"><GetNotifications/></div>
+      <div id="not"><GetProperties/></div>
     </main>
   );
 }

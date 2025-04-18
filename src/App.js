@@ -11,6 +11,8 @@ import ProtectedRoute from "./ProtectedRoute"; // Import ProtectedRoute
 import "./App.css";
 import MyProfile from "./components/MyProfile";
 import Hero2 from "./Hero2";
+import GetProperties from "./components/properties/GetProperty";
+import PostProperty from "./components/properties/PostProperty";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/reg" element={<RegistrationForm />} />
         <Route path="/ResetPassword" element={<PasswordReset />} />
+        <Route path="/GetProperties" element={<GetProperties/>} />
+        <Route path="/PostProperties" element={<PostProperty/>} />
         
 
         <Route path="/me" element={<ProtectedRoute element={<MyProfile/>} />} />
