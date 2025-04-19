@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
 import Banner from "../Banner"; // Import the Banner component
 
 const API_URL = "https://localhost:7150/api/lease";
@@ -9,6 +10,7 @@ const CreateLease = () => {
     const [signature, setSignature] = useState("");
     const [bannerMessage, setBannerMessage] = useState(""); // State for banner message
     const [showBanner, setShowBanner] = useState(false); // State to show/hide banner
+    const navigate = useNavigate(); // Hook for navigation
 
     const handleStartDateChange = (e) => {
         const selectedDate = new Date(e.target.value); // Selected start date
@@ -77,6 +79,9 @@ const CreateLease = () => {
 
             setBannerMessage(responseText);
             setShowBanner(true);
+
+            // Navigate to the payment page after a successful submission
+            navigate("/payment");
         } catch (error) {
             console.error("Error while creating lease:", error.message);
             setBannerMessage("Failed to create lease. Please try again.");

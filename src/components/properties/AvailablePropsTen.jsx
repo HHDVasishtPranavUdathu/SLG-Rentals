@@ -46,6 +46,8 @@ const AvailablePropsTen = () => {
 
   return (
     <div className="container">
+
+      <h4>All the properties we offer:</h4>
       <div className="property-container">
         {currentProperties.map((pr) => (
           <div className="property-card" key={pr.property_Id}>

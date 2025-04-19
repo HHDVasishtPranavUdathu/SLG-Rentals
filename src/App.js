@@ -15,6 +15,10 @@ import GetProperties from "./components/properties/GetProperty";
 import PostProperty from "./components/properties/PostProperty";
 import AllProperties from "./components/properties/AllProperties";
 import HeroT from "./HeroT";
+import AddMaintain from "./components/maintain/AddMaintain";
+import TenantReqMaintaince from "./components/maintain/TenantReqMaintaince";
+import OwnerReq from "./components/maintain/OwnerReq";
+import AllOwnerReq from "./components/maintain/AllOwnerReq";
 
 function App() {
   return (
@@ -32,10 +36,14 @@ function App() {
         <Route path="/noti" element={<ProtectedRoute element={<NotificationCRUD />} />} />
         <Route path="/lease/owner" element={<ProtectedRoute element={<OwnerLease />} role="owner" />} />
         <Route path="/PostProperties" element={<ProtectedRoute element={<PostProperty />} role="owner" />} />
+        <Route path="/OwnerReq" element={<ProtectedRoute element={<OwnerReq/>} role="owner" />} />
+        <Route path="/AllOwnerReq" element={<ProtectedRoute element={<AllOwnerReq/>} role="owner" />} />
         <Route path="/o" element={<ProtectedRoute element={<Hero2 />} role="owner" />} />
         <Route path="/lease/tenant" element={<ProtectedRoute element={<TenantLease />} role="tenant" />} />
         <Route path="/t" element={<ProtectedRoute element={<HeroT/>} role="tenant" />} />
         <Route path="/GetProperties" element={<ProtectedRoute element={<GetProperties />} role="tenant" />} />
+        <Route path="/addmaintain" element={<ProtectedRoute element={<AddMaintain />} role="tenant" />} />
+        <Route path="/maintainreq" element={<ProtectedRoute element={<TenantReqMaintaince/>} role="tenant" />} />
       </Routes>
     </Router>
   );

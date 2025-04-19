@@ -12,7 +12,7 @@ export default function Hero2() {
         localStorage.removeItem("user_id");
         localStorage.removeItem("token");
     }}>Logout</Link>
-          <Link to="/reg" className="link-default">Register</Link>
+          <Link to="/lease/owner" className="link-default">Lease</Link>
           <Link to="/properties" className="link-primary">See Properties ↓</Link>
         </div>
       </header>
@@ -24,7 +24,6 @@ export default function Hero2() {
         </p>
 
         <div className="button-group">
-          {/* <Link to="#not"className="btn-primary">See Properties ↓</Link> */}
            <a href="#not" className="btn-primary">See Notifications ↓</a>
           <Link to="/reg" className="btn-secondary">Register</Link>
         </div>

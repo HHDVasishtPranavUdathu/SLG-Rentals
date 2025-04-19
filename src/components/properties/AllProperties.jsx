@@ -13,9 +13,9 @@ const AllProperties = () => {
   const propertiesPerPage = 4;
 
   useEffect(() => {
-    if (!userId.startsWith("O")) {
+    // if (!userId.startsWith("O")) {
       loadProperty();
-    }
+    // }
   }, [userId]);
 
   const loadProperty = async () => {

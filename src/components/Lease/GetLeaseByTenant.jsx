@@ -59,26 +59,51 @@ const GetLeasesByTenantId = () => {
     };
 
     return (
-        <div>
+        <div style={{ padding: "1rem" }}>
             {showBanner && <Banner message={bannerMessage} onClose={closeBanner} />} {/* Use Banner component */}
             <h3>Leases for Tenant</h3>
 
             {/* Display lease details if available */}
-            {leases.length > 0 && (
-                <div style={{ marginTop: "20px" }}>
-                    <h4>Leases</h4>
-                    <ul>
-                        {leases.map((lease) => (
-                            <li key={lease.LeaseId}>
-                                <strong>Lease ID:</strong> {lease.leaseId}<br />
-                                <strong>Property ID:</strong> {lease.property_Id}<br />
-                                <strong>Start Date:</strong> {new Date(lease.startDate).toLocaleDateString()}<br />
-                                <strong>End Date:</strong> {new Date(lease.endDate).toLocaleDateString()}<br />
-                                <strong>Status:</strong> {lease.lease_status ? "Active" : "Inactive"}
-                            </li>
-                        ))}
-                    </ul>
+            {leases.length > 0 ? (
+                <div style={{ marginTop: "20px", overflowX: "auto" }}>
+                    <table
+                        style={{
+                            width: "100%",
+                            borderCollapse: "collapse",
+                            marginBottom: "1rem",
+                            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                        }}
+                    >
+                        <thead>
+                            <tr style={{ backgroundColor: "#007bff", color: "black", textAlign: "left" }}>
+                                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Lease ID</th>
+                                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Property ID</th>
+                                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Start Date</th>
+                                <th style={{ padding: "10px", border: "1px solid #ddd" }}>End Date</th>
+                                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {leases.map((lease) => (
+                                <tr key={lease.leaseId} style={{ borderBottom: "1px solid #ddd" }}>
+                                    <td style={{ padding: "10px" }}>{lease.leaseId}</td>
+                                    <td style={{ padding: "10px" }}>{lease.property_Id}</td>
+                                    <td style={{ padding: "10px" }}>
+                                        {new Date(lease.startDate).toLocaleDateString()}
+                                    </td>
+                                    <td style={{ padding: "10px" }}>
+                                        {new Date(lease.endDate).toLocaleDateString()}
+                                    </td>
+                                    <td style={{ padding: "10px" }}>
+                                        {lease.lease_status ? "Active" : "Inactive"}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
+            ) : (
+                <p>No leases found for this tenant.</p>
             )}
         </div>
     );
