@@ -1,0 +1,213 @@
+
+   
+  .payment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+   
+  .payment-button {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    text-align: center;
+  }
+   
+  .payment-details {
+    display: none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    width: 200px;
+  }
+   
+  .payment-button:hover .payment-details {
+    display: block;
+  }
+   
+  .hover-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+   
+  .hover-card button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+   
+  .button-green {
+    background-color: green;
+    color: white;
+  }
+   
+  .button-red {
+    background-color: red;
+    color: white;
+  }
+   
+  .button-gray {
+    background-color: gray;
+    color: white;
+  }
+   
+  .payment-details{
+    color: #000;
+  }
+   
+  .filter-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+   
+  .filter-button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+  }
+   
+  .filter-button:hover {
+    background-color: #ddd;
+  }
+  .date-filter,
+  .interval-filter {
+    margin-bottom: 20px;
+  }
+   
+  .date-filter label,
+  .interval-filter label {
+    display: block;
+    margin-bottom: 10px;
+  }
+   
+  .filter-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+   
+  .filter-button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+  }
+   
+  .filter-button:hover {
+    background-color: #ddd;
+  }
+
+   
+  .filter-container {
+    margin-bottom: 20px;
+    width: calc(100% - 40px   );
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  }
+   
+  .filter-dropdown {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+  }
+   
+  .date-filter,
+  .interval-filter {
+    margin-bottom: 20px;
+  }
+   
+  .date-filter label,
+  .interval-filter label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+   
+  .filter-dropdown:hover {
+    background-color: #eaeaea;
+  }
+   
+  .payment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+   
+  .payment-button {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 180px;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+   
+  .payment-details {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+  }
+   
+  .button-green {
+    background-color: #28a745;
+    color: white;
+  }
+   
+  .button-red {
+    background-color: #dc3545;
+    color: white;
+  }
+   
+  .button-gray {
+    background-color: #6c757d;
+    color: white;
+  }
+   
+  .back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-bottom: 60px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    position:absolute; /* Added for positioning */
+    top: 70px;         /* Distance from the top */
+    left: 10px;        /* Distance from the left */
+  }
+   
+  .back-button:hover {
+    background-color: #0056b3;
+  }

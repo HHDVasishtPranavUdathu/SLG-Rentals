@@ -19,6 +19,9 @@ import AddMaintain from "./components/maintain/AddMaintain";
 import TenantReqMaintaince from "./components/maintain/TenantReqMaintaince";
 import OwnerReq from "./components/maintain/OwnerReq";
 import AllOwnerReq from "./components/maintain/AllOwnerReq";
+import LeasePayment from "./components/Payment/PostPayments";
+import GetPayments from "./components/Payment/GetPayments";
+import GetPaymentsByOwnerId from "./components/Payment/GetPaymentOwner";
 
 function App() {
   return (
@@ -38,12 +41,15 @@ function App() {
         <Route path="/PostProperties" element={<ProtectedRoute element={<PostProperty />} role="owner" />} />
         <Route path="/OwnerReq" element={<ProtectedRoute element={<OwnerReq/>} role="owner" />} />
         <Route path="/AllOwnerReq" element={<ProtectedRoute element={<AllOwnerReq/>} role="owner" />} />
+        <Route path="/getpayowner" element={<ProtectedRoute element={<GetPaymentsByOwnerId/>} role="owner" />} />
         <Route path="/o" element={<ProtectedRoute element={<Hero2 />} role="owner" />} />
+        <Route path="/getpayments" element={<ProtectedRoute element={<GetPayments/>} role="tenant" />} />
         <Route path="/lease/tenant" element={<ProtectedRoute element={<TenantLease />} role="tenant" />} />
         <Route path="/t" element={<ProtectedRoute element={<HeroT/>} role="tenant" />} />
         <Route path="/GetProperties" element={<ProtectedRoute element={<GetProperties />} role="tenant" />} />
         <Route path="/addmaintain" element={<ProtectedRoute element={<AddMaintain />} role="tenant" />} />
         <Route path="/maintainreq" element={<ProtectedRoute element={<TenantReqMaintaince/>} role="tenant" />} />
+        <Route path="/postpayment" element={<ProtectedRoute element={<LeasePayment/>} role="tenant" />} />
       </Routes>
     </Router>
   );

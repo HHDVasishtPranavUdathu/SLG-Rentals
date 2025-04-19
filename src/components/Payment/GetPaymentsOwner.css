@@ -1,0 +1,71 @@
+.payment-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+ 
+.payment-button {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  text-align: center;
+}
+ 
+.payment-details {
+  display: none;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  width: 200px;
+}
+ 
+.payment-button:hover .payment-details {
+  display: block;
+}
+ 
+.hover-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+ 
+.hover-card button {
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+ 
+.button-green {
+  background-color: green;
+  color: white;
+}
+ 
+.button-red {
+  background-color: red;
+  color: white;
+}
+ 
+.button-gray {
+  background-color: gray;
+  color: white;
+}
+ 
+.payment-details{
+  color: #000;
+}
