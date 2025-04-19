@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Ensure useNavigate is imported
+import {Link, useNavigate } from "react-router-dom"; // Ensure useNavigate is imported
 import axios from "axios";
- 
+import NotiBtn from "../notification/NotiBtn";
+
 const API_URL = "https://localhost:7150/api/Maintainances/tenant";
- 
+
 const TenantReqMaintaince = () => {
   const [requests, setRequests] = useState([]);
   const [formData, setFormData] = useState({ tenant_Id: '' });
   const [currentPage, setCurrentPage] = useState(1);
   const [requestsPerPage] = useState(10); // Number of requests per page
   const navigate = useNavigate();
- 
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("token");
+    window.location.href = "/login"; // Redirect to login after logout
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
@@ -30,31 +42,94 @@ const TenantReqMaintaince = () => {
           },
         });
         console.log('Response data:', response.data); // Log the response data
- 
+
         // Assuming response.data is an array of requests
         setRequests(response.data);
       } catch (error) {
-        console.error('Authentication failed:', error);
-        // localStorage.removeItem('token');
-        // navigate('/');
+        console.log(error);
       }
     };
- 
+
     fetchUserData();
   }, [navigate, formData.tenant_Id]);
- 
+
   // Get current requests
   const indexOfLastRequest = currentPage * requestsPerPage;
   const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
   const currentRequests = requests.slice(indexOfFirstRequest, indexOfLastRequest);
- 
+
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
- 
+
   return (
     <div className="container">
+      <header className="header">
+        <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
+        <div className="header-links">
+          <Link to="/lease/tenant" className="link-default">Lease</Link>
+          <Link to="/GetProperties" className="link-primary">All Properties ↓</Link>
+          <NotiBtn />
+          {/* Profile Section with Dropdown */}
+          <div className="profile-section" style={{ position: "relative", cursor: "pointer" }}>
+            <img
+              src="https://github.com/HHDVasishtPranavUdathu/SLG-Rentals/blob/main/src/components/user_12533276.png?raw=true"
+              alt="me"
+              onMouseEnter={toggleDropdown}
+              style={{ width: "20px", height: "20px", borderRadius: "50%" }}
+            />
+            {/* Dropdown Menu */}
+            {isDropdownVisible && (
+              <div
+                className="dropdown-menu"
+                style={{
+                  position: "absolute",
+                  top: "60px",
+                  right: "0",
+                  backgroundColor: "#fff",
+                  border: "1px solid #ccc",
+                  borderRadius: "5px",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  zIndex: "1000",
+                  width: "150px",
+                }}
+              >
+                <Link
+                  to="/me"
+                  className="dropdown-item"
+                  style={{
+                    display: "block",
+                    padding: "10px",
+                    textDecoration: "none",
+                    color: "#333",
+                    borderBottom: "1px solid #ddd",
+                  }}
+                  onClick={() => setIsDropdownVisible(false)} // Close dropdown after clicking
+                >
+                  My Account
+                </Link>
+                <button
+                  className="dropdown-item"
+                  onClick={handleLogout} // Handle logout
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    padding: "10px",
+                    textAlign: "left",
+                    background: "none",
+                    border: "none",
+                    color: "#333",
+                    cursor: "pointer",
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
       <h2>Pending tenant Requests</h2>
- 
+
       <table border="1">
         <thead>
           <tr>
@@ -79,7 +154,7 @@ const TenantReqMaintaince = () => {
           ))}
         </tbody>
       </table>
- 
+
       <div className="pagination">
         {Array.from({ length: Math.ceil(requests.length / requestsPerPage) }, (_, index) => (
           <button key={index + 1} onClick={() => paginate(index + 1)}>
@@ -90,6 +165,5 @@ const TenantReqMaintaince = () => {
     </div>
   );
 };
- 
+
 export default TenantReqMaintaince;
- 

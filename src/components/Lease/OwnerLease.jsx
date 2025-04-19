@@ -98,6 +98,7 @@ const OwnerLease = () => {
                     </div>
                 </div>
             </header>
+            <div className="contain">
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "2rem" }}>
                 <h2>Owner Lease Management</h2>
 
@@ -142,6 +143,7 @@ const OwnerLease = () => {
                     {activeTab === "getByOwner" && <GetLeasesByOwner showBanner={handleShowBanner} />}
                 </div>
             </div>
+        </div>
         </div>
     );
 };

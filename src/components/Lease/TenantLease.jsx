@@ -5,33 +5,33 @@ import GetLeaseByTenant from "./GetLeaseByTenant";
 import { Link } from "react-router-dom";
 
 const TenantLease = () => {
-    const [activeTab, setActiveTab] = useState("create");
-    const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
-  
-    const toggleDropdown = () => {
-      setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
-    };
-  
-    const handleLogout = () => {
-      localStorage.removeItem("user_id");
-      localStorage.removeItem("token");
-      window.location.href = "/login"; // Redirect to login after logout
-    };
+  const [activeTab, setActiveTab] = useState("create");
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
 
-    return (
-        <div  className="container">
-            <header className="header">
+  const toggleDropdown = () => {
+    setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("token");
+    window.location.href = "/login"; // Redirect to login after logout
+  };
+
+  return (
+    <div className="container">
+      <header className="header">
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
         <div className="header-links">
           <Link to="/lease/tenant" className="link-default">Lease</Link>
           <Link to="/GetProperties" className="link-primary">All Properties ↓</Link>
-          <NotiBtn/>
+          <NotiBtn />
           {/* Profile Section with Dropdown */}
           <div className="profile-section" style={{ position: "relative", cursor: "pointer" }}>
             <img
               src="https://github.com/HHDVasishtPranavUdathu/SLG-Rentals/blob/main/src/components/user_12533276.png?raw=true"
               alt="me"
-              onMouseEnter={toggleDropdown} 
+              onMouseEnter={toggleDropdown}
               style={{ width: "20px", height: "20px", borderRadius: "50%" }}
             />
             {/* Dropdown Menu */}
@@ -85,47 +85,47 @@ const TenantLease = () => {
           </div>
         </div>
       </header>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "2rem" }}>
-                <h2>Tenant Lease Management</h2>
-                {/* Tabs for navigation */}
-                <div style={{ marginBottom: "1rem" }}>
-                    <button
-                        onClick={() => setActiveTab("create")}
-                        style={{
-                            padding: "0.5rem 1rem",
-                            margin: "0 0.5rem",
-                            backgroundColor: activeTab === "create" ? "#007bff" : "#e0e0e0",
-                            color: activeTab === "create" ? "white" : "#333",
-                            border: "none",
-                            borderRadius: "4px",
-                            cursor: "pointer",
-                        }}
-                    >
-                        Create Lease
-                    </button>
-                    <button
-                        onClick={() => setActiveTab("getByTenant")}
-                        style={{
-                            padding: "0.5rem 1rem",
-                            margin: "0 0.5rem",
-                            backgroundColor: activeTab === "getByTenant" ? "#007bff" : "#e0e0e0",
-                            color: activeTab === "getByTenant" ? "white" : "#333",
-                            border: "none",
-                            borderRadius: "4px",
-                            cursor: "pointer",
-                        }}
-                    >
-                        My Leases
-                    </button>
-                </div>
-                {/* Render active tab */}
-                <div style={{ maxWidth: "600px", width: "100%", border: "1px solid #ddd", padding: "1rem", borderRadius: "8px" }}>
-                    {activeTab === "create" && <CreateLease />}
-                    {activeTab === "getByTenant" && <GetLeaseByTenant />}
-                </div>
-            </div>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "2rem" }}>
+        <h2>Tenant Lease Management</h2>
+        {/* Tabs for navigation */}
+        <div style={{ marginBottom: "1rem" }}>
+          <button
+            onClick={() => setActiveTab("create")}
+            style={{
+              padding: "0.5rem 1rem",
+              margin: "0 0.5rem",
+              backgroundColor: activeTab === "create" ? "#007bff" : "#e0e0e0",
+              color: activeTab === "create" ? "white" : "#333",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            Create Lease
+          </button>
+          <button
+            onClick={() => setActiveTab("getByTenant")}
+            style={{
+              padding: "0.5rem 1rem",
+              margin: "0 0.5rem",
+              backgroundColor: activeTab === "getByTenant" ? "#007bff" : "#e0e0e0",
+              color: activeTab === "getByTenant" ? "white" : "#333",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            My Leases
+          </button>
         </div>
-    );
+        {/* Render active tab */}
+        <div style={{ maxWidth: "600px", width: "100%", border: "1px solid #ddd", padding: "1rem", borderRadius: "8px" }}>
+          {activeTab === "create" && <CreateLease />}
+          {activeTab === "getByTenant" && <GetLeaseByTenant />}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default TenantLease;
