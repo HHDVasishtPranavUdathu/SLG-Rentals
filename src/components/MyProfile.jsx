@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NotiBtn from "./notification/NotiBtn";
 import axios from "axios";
 
@@ -10,6 +10,49 @@ const MyProfile = () => {
     // Fetch the userId from localStorage
     const userId = localStorage.getItem("user_id"); // Make sure this key matches your app's setup
     const API_URL = `https://localhost:7150/api/Registrations/${userId}`;
+
+    const [activeTab, setActiveTab] = useState("read");
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
+    const [userRole, setUserRole] = useState(""); // State to determine user role (Tenant or Owner)
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userId = localStorage.getItem("user_id");
+        // Determine user role based on user_id prefix
+        if (userId?.startsWith("T")) {
+            setUserRole("Tenant");
+        } else if (userId?.startsWith("O")) {
+            setUserRole("Owner");
+        } else {
+            setUserRole("Unknown");
+        }
+    }, []);
+
+    const handleLeaseNavigation = () => {
+        if (userRole === "Tenant") {
+            navigate("/lease/tenant"); // Navigate to tenant lease page
+        } else if (userRole === "Owner") {
+            navigate("/lease/owner"); // Navigate to owner lease page
+        }
+    };
+
+    const handlePropertiesNavigation = () => {
+        if (userRole === "Tenant") {
+            navigate("/GetProperties"); // Navigate to tenant properties page
+        } else if (userRole === "Owner") {
+            navigate("/PostProperties"); // Navigate to owner post properties page
+        }
+    };
+
+    const toggleDropdown = () => {
+        setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("token");
+        window.location.href = "/login"; // Redirect to login after logout
+    };
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -43,10 +86,88 @@ const MyProfile = () => {
             <header className="header">
                 <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
                 <div className="header-links">
-                    <Link to="/login" className="link-default">Login</Link>
-                    <Link to="/register" className="link-default">Register</Link>
-                    <Link to="/properties" className="link-primary">See Properties ↓</Link>
+                <a
+                        onClick={handleLeaseNavigation}
+                        className="link-default"
+                        style={{
+                            cursor: "pointer",
+                            background: "none",
+                            border: "none",
+                            color: "#007bff",
+                        }}
+                    >
+                        Lease
+                    </a>
+                    <a
+                        onClick={handlePropertiesNavigation}
+                        className="link-default"
+                        style={{
+                            cursor: "pointer",
+                            background: "none",
+                            border: "none",
+                            color: "#007bff",
+                        }}
+                    >
+                        Properties
+                    </a>
                     <NotiBtn />
+                    {/* Profile Section with Dropdown */}
+                    <div className="profile-section" style={{ position: "relative", cursor: "pointer" }}>
+                        <img
+                            src="https://github.com/HHDVasishtPranavUdathu/SLG-Rentals/blob/main/src/components/user_12533276.png?raw=true"
+                            alt="me"
+                            onClick={toggleDropdown}
+                            style={{ width: "20px", height: "20px", borderRadius: "50%" }}
+                        />
+                        {/* Dropdown Menu */}
+                        {isDropdownVisible && (
+                            <div
+                                className="dropdown-menu"
+                                style={{
+                                    position: "absolute",
+                                    top: "60px",
+                                    right: "0",
+                                    backgroundColor: "#fff",
+                                    border: "1px solid #ccc",
+                                    borderRadius: "5px",
+                                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                                    zIndex: "1000",
+                                    width: "150px",
+                                }}
+                            >
+                                <Link
+                                    to="/me"
+                                    className="dropdown-item"
+                                    style={{
+                                        display: "block",
+                                        padding: "10px",
+                                        textDecoration: "none",
+                                        color: "#333",
+                                        borderBottom: "1px solid #ddd",
+                                    }}
+                                    onClick={() => setIsDropdownVisible(false)} // Close dropdown after clicking
+                                >
+                                    My Account
+                                </Link>
+                                <button
+                                    className="dropdown-item"
+                                    onClick={handleLogout} // Handle logout
+                                    style={{
+                                        display: "block",
+                                        width: "100%",
+                                        padding: "10px",
+                                        textAlign: "left",
+                                        background: "none",
+                                        border: "none",
+                                        color: "#333",
+                                        cursor: "pointer",
+                                    }}
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </header>
             <div style={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
