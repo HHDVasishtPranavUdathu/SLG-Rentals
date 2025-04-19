@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"; 
 import "./Hero.css";
+import PostpropNoNav from "./components/properties/PostpropNoNav";
 
 export default function Hero2() {
   return (
@@ -13,7 +14,8 @@ export default function Hero2() {
         localStorage.removeItem("token");
     }}>Logout</Link>
           <Link to="/lease/owner" className="link-default">Lease</Link>
-          <Link to="/properties" className="link-primary">See Properties ↓</Link>
+          <Link to="/properties" className="link-primary">My Properties ↓</Link>
+          <img src="src\components\user_12533276.png" alt="" />
         </div>
       </header>
 
@@ -24,8 +26,9 @@ export default function Hero2() {
         </p>
 
         <div className="button-group">
-           <a href="#not" className="btn-primary">See Notifications ↓</a>
-          <Link to="/reg" className="btn-secondary">Register</Link>
+           <a href="#not" className="btn-primary">My Properties ↓</a>
+          <Link to="/PostProperties" className="btn-secondary">Add new property</Link>
+          <a href=""></a>
         </div>
 
         <div className="preview-images">
@@ -50,6 +53,10 @@ export default function Hero2() {
               className="image"
             />
           </div>
+        </div>
+        <div id="not">
+          <PostpropNoNav/>
+
         </div>
       </section>
     </main>
