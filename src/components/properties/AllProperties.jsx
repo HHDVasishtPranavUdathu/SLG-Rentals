@@ -50,7 +50,7 @@ const AllProperties = () => {
         <div className="property-container">
             {currentProperties.map((pr) => (
             <div className="property-card" key={pr.property_Id}>
-                <img src="https://tse2.mm.bing.net/th/id/OIP.uIMPvMRhXXG3rGddF6gxFgHaE8?w=1024&h=683&rs=1&pid=ImgDetMain" alt="Property" className="property-image" />
+                <img src={pr.image} alt="Property" className="property-image" />
                 <div className="property-details">
                 <p>proprty at</p>
                 <h3>{pr.address}</h3>

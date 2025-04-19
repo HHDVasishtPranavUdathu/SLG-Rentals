@@ -11,7 +11,8 @@ const PostProperty = () => {
         description: "",
         availableStatus: "false",
         owner_Signature: "",
-        priceOfTheProperty: 0
+        priceOfTheProperty: 0,
+        image: "" // Added image field
     });
     const [properties, setProperties] = useState([]);
     const [bannerMessage, setBannerMessage] = useState("");
@@ -40,9 +41,9 @@ const PostProperty = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { address, description, priceOfTheProperty, availableStatus, owner_Signature } = formData;
+        const { address, description, priceOfTheProperty, availableStatus, owner_Signature, image } = formData;
 
-        if (!address || !description || !priceOfTheProperty || !availableStatus || !owner_Signature) {
+        if (!address || !description || !priceOfTheProperty || !availableStatus || !owner_Signature || !image) {
             setBannerMessage("All fields are required.");
             return;
         }
@@ -54,7 +55,8 @@ const PostProperty = () => {
                 priceOfTheProperty,
                 availableStatus,
                 owner_Id: userId, // Use the owner ID from localStorage
-                owner_Signature
+                owner_Signature,
+                image // Include image in the request
             }), {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -67,7 +69,8 @@ const PostProperty = () => {
                 description: "",
                 priceOfTheProperty: 0,
                 availableStatus: "false",
-                owner_Signature: ""
+                owner_Signature: "",
+                image: ""
             });
             setBannerMessage("Property added successfully!"); // Show success message in banner
             fetchPropertiesByUserId(userId); // Refresh properties
@@ -81,14 +84,22 @@ const PostProperty = () => {
         }
     };
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
     return (
         <div className="container">
-
             <h4>Your Properties:</h4>
             <div className="property-container">
                 {properties.length > 0 ? (
                     properties.map((property) => (
                         <div className="property-card" key={property.property_Id}>
+                            <img src={property.image} alt="Property" className="property-image" />
                             <h3>{property.address}</h3>
                             <p>{property.description}</p>
                             <p>Price: {property.priceOfTheProperty}</p>
@@ -102,6 +113,7 @@ const PostProperty = () => {
                     <p>No properties found for owner ID: {userId}</p>
                 )}
             </div>
+            
         </div>
     );
 };
