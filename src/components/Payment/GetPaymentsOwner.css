@@ -52,12 +52,12 @@
 }
  
 .button-green {
-  background-color: green;
+  background-color: green !important;
   color: white;
 }
  
 .button-red {
-  background-color: red;
+  background-color: red !important;
   color: white;
 }
  
