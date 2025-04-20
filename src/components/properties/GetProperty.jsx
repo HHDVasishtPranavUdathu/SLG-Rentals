@@ -143,7 +143,7 @@ const GetProperties = () => {
       <div className="property-container">
         {filteredProperties.slice(indexOfFirstProperty, indexOfLastProperty).map((pr) => (
           <div className="property-card" key={pr.property_Id}>
-            <img src="https://tse2.mm.bing.net/th/id/OIP.uIMPvMRhXXG3rGddF6gxFgHaE8?w=1024&h=683&rs=1&pid=ImgDetMain" alt="Property" className="property-image" />
+            <img src={pr.iimage} alt="Property" className="property-image" />
             <div className="property-details">
               <h3>{pr.address}</h3>
               <p>{pr.description}</p>

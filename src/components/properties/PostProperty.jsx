@@ -12,10 +12,10 @@ const PostProperty = () => {
   const [formData, setFormData] = useState({
     address: "",
     description: "",
-    availableStatus: "false",
+    availableStatus: "",
     owner_Signature: "",
-    priceOfTheProperty: 0,
-    image: "" // Added image field
+    priceOfTheProperty: "",
+    iimage: "" // Added iimage field
   });
   const [properties, setProperties] = useState([]);
   const [bannerMessage, setBannerMessage] = useState("");
@@ -44,9 +44,9 @@ const PostProperty = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { address, description, priceOfTheProperty, availableStatus, owner_Signature, image } = formData;
+    const { address, description, priceOfTheProperty, availableStatus, owner_Signature, iimage } = formData;
 
-    if (!address || !description || !priceOfTheProperty || !availableStatus || !owner_Signature || !image) {
+    if (!address || !description || !priceOfTheProperty || !availableStatus || !owner_Signature || !iimage) {
       setBannerMessage("All fields are required."); // Show error in the banner
       return;
     }
@@ -59,7 +59,7 @@ const PostProperty = () => {
         availableStatus,
         owner_Id: userId, // Use the owner ID from localStorage
         owner_Signature,
-        image
+        iimage
       }), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -73,7 +73,7 @@ const PostProperty = () => {
         priceOfTheProperty: 0,
         availableStatus: "false",
         owner_Signature: "",
-        image: ""
+        iimage: ""
       });
       setBannerMessage("Property added successfully!"); // Show success message in banner
       fetchPropertiesByUserId(userId); // Refresh properties
@@ -227,13 +227,13 @@ const PostProperty = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="image">Image URL:</label>
+            <label htmlFor="iimage">Image URL:</label>
             <input
-              id="image"
+              id="iimage"
               type="text"
-              placeholder="Enter image URL"
-              value={formData.image}
-              onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+              placeholder="Enter Image URL"
+              value={formData.iimage}
+              onChange={(e) => setFormData({ ...formData, iimage: e.target.value })}
               required
             />
           </div>
@@ -245,7 +245,7 @@ const PostProperty = () => {
         {properties.length > 0 ? (
           properties.map((property) => (
             <div className="property-card" key={property.property_Id}>
-              <img src={property.image} alt="Property" className="property-image" />
+              <img src={property.iimage} alt="Property" className="property-iimage" />
               <h3>{property.address}</h3>
               <p>{property.description}</p>
               <p>Price: {property.priceOfTheProperty}</p>
