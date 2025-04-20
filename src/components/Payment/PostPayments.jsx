@@ -296,10 +296,15 @@ const LeasePayment = () => {
                       required
                     /> */}
                                     </div>
-                                    <button type="submit">Add Payment</button>
-                                    <button type="button" onClick={resetForm}>
-                                        Cancel
-                                    </button>
+                                    <div style={{
+                                        display: "flex",
+                                        gap: "10px",
+                                    }}>
+                                        <button type="submit">Add Payment</button>
+                                        <button type="button" onClick={resetForm}>
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </form>
                                 {payError && <h5 style={{ color: "red" }}>{payError}</h5>}
                                 {sucess && <h5 style={{ color: "blue" }}>Payment completed successfully!</h5>}
