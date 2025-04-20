@@ -203,8 +203,8 @@ const RegistrationForm = () => {
                     required
                 >
                     <option value="" label="Select role" />
-                    <option value="O" label="Owner" />
-                    <option value="T" label="Tenant" />
+                    <option value="o" label="Owner" />
+                    <option value="t" label="Tenant" />
                 </select>
                 {formik.touched.roleofUser && formik.errors.roleofUser ? <div className="error">{formik.errors.roleofUser}</div> : null}
                

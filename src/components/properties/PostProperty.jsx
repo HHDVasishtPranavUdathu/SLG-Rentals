@@ -14,7 +14,8 @@ const PostProperty = () => {
     description: "",
     availableStatus: "false",
     owner_Signature: "",
-    priceOfTheProperty: 0
+    priceOfTheProperty: 0,
+    Iimage:""
   });
   const [properties, setProperties] = useState([]);
   const [bannerMessage, setBannerMessage] = useState("");
