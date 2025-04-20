@@ -51,13 +51,13 @@ const AvailablePropsTen = () => {
       <div className="property-container">
         {currentProperties.map((pr) => (
           <div className="property-card" key={pr.property_Id}>
-            <img src={pr.image}alt="Property" className="property-image" />
+            <img src={pr.image} alt="Property" className="property-image" />
             <div className="property-details">
-              <p>proprty at</p>
+              <p>Property at</p>
               <h3>{pr.address}</h3>
               <p>{pr.description}</p>
               <p>Price: {pr.priceOfTheProperty}</p>
-              <p>Status: {pr.availableStatus}</p>
+              <p>Status: {pr.availableStatus === true ? "Available" : "Not Available"}</p> {/* Ensure status is displayed correctly */}
               <p>Owner Name: {pr.owner_Name}</p>
               <p>Phone Number: {pr.owner_PhoneNumber}</p>
               <button

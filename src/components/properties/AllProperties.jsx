@@ -13,9 +13,7 @@ const AllProperties = () => {
   const propertiesPerPage = 4;
 
   useEffect(() => {
-    // if (!userId.startsWith("O")) {
-      loadProperty();
-    // }
+    loadProperty();
   }, [userId]);
 
   const loadProperty = async () => {
@@ -47,20 +45,20 @@ const AllProperties = () => {
   return (
     <div className="container">
       <h4>All the properties we offer:</h4>
-        <div className="property-container">
-            {currentProperties.map((pr) => (
-            <div className="property-card" key={pr.property_Id}>
-                <img src={pr.image} alt="Property" className="property-image" />
-                <div className="property-details">
-                <p>proprty at</p>
-                <h3>{pr.address}</h3>
-                <p>{pr.description}</p>
-                <p>Price: {pr.priceOfTheProperty}</p>
-                <p>Status: {pr.availableStatus}</p>
-                <p>Owner Name: {pr.owner_Name}</p>
-                <p>Phone Number: {pr.owner_PhoneNumber}</p>
-                <button onClick={() =>navigate('/login')}>apply</button>
-                </div>
+      <div className="property-container">
+        {currentProperties.map((pr) => (
+          <div className="property-card" key={pr.property_Id}>
+            <img src={pr.image} alt="Property" className="property-image" />
+            <div className="property-details">
+              <p>Property at</p>
+              <h3>{pr.address}</h3>
+              <p>{pr.description}</p>
+              <p>Price: {pr.priceOfTheProperty}</p>
+              <p>Status: {pr.availableStatus === true ? "Available" : "Not Available"}</p> {/* Ensure status is displayed correctly */}
+              <p>Owner Name: {pr.owner_Name}</p>
+              <p>Phone Number: {pr.owner_PhoneNumber}</p>
+              <button onClick={() => navigate('/login')}>apply</button>
+            </div>
           </div>
         ))}
       </div>

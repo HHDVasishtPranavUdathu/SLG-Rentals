@@ -131,28 +131,35 @@ const GetProperties = () => {
         </div>
       </header>
 
-      <div className="search-bar">
+      <div className="search-bar" style={{ margin: "20px 0", textAlign: "center" }}>
         <input 
           type="text" 
           placeholder="Search by address..." 
           value={search} 
           onChange={(e) => setSearch(e.target.value)} 
+          style={{
+            padding: "10px",
+            width: "80%",
+            maxWidth: "400px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
+          }}
         />
       </div>
 
       <div className="property-container">
         {filteredProperties.slice(indexOfFirstProperty, indexOfLastProperty).map((pr) => (
           <div className="property-card" key={pr.property_Id}>
-            <img src="https://tse2.mm.bing.net/th/id/OIP.uIMPvMRhXXG3rGddF6gxFgHaE8?w=1024&h=683&rs=1&pid=ImgDetMain" alt="Property" className="property-image" />
+            <img src={pr.image} alt="Property" className="property-image" />
             <div className="property-details">
               <h3>{pr.address}</h3>
               <p>{pr.description}</p>
               <p>Price: {pr.priceOfTheProperty}</p>
-              <p>Status: {pr.availableStatus}</p>
+              <p>Status: {pr.availableStatus === true ? "Available" : "Not Available"}</p> {/* Ensure status is displayed correctly */}
               <p>Owner ID: {pr.owner_Id}</p>
               <p>Owner Name: {pr.owner_Name}</p>
               <p>Phone Number: {pr.owner_PhoneNumber}</p>
-              <p>Signature: {pr.owner_Signature}</p>
               <button onClick={() =>navigate('/lease/tenant')}>apply</button>
             </div>
           </div>
