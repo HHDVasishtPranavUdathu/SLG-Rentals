@@ -242,23 +242,24 @@ const PostProperty = () => {
       )}
       <h4>Your Properties:</h4>
       <div className="property-container">
-        {properties.length > 0 ? (
-          properties.map((property) => (
-            <div className="property-card" key={property.property_Id}>
-              <img src={property.iimage} alt="Property" className="property-iimage" />
-              <h3>{property.address}</h3>
-              <p>{property.description}</p>
-              <p>Price: {property.priceOfTheProperty}</p>
-              <p>Status: {property.availableStatus}</p>
-              <p>Owner ID: {property.owner_Id}</p>
-              <p>Owner Name: {property.owner_Name}</p>
-              <p>Phone Number: {property.owner_PhoneNumber}</p>
-            </div>
-          ))
-        ) : (
-          <p>No properties found for owner ID: {userId}</p>
-        )}
+  {properties.length > 0 ? (
+    properties.map((property) => (
+      <div className="property-card" key={property.property_Id}>
+        <img src={property.image} alt="Property" className="property-image" />
+        <h3>{property.address}</h3>
+        <p>{property.description}</p>
+        <p>Price: {property.priceOfTheProperty}</p>
+        <p>Status: {property.availableStatus === "true" ? "Available" : "Not Available"}</p> {/* Ensure status is displayed correctly */}
+        <p>Owner ID: {property.owner_Id}</p>
+        <p>Owner Name: {property.owner_Name}</p>
+        <p>Phone Number: {property.owner_PhoneNumber}</p>
       </div>
+    ))
+  ) : (
+    <p>No properties found for owner ID: {userId}</p>
+  )}
+</div>
+
     </div>
   );
 };
