@@ -4,19 +4,18 @@ import "./GetProperties.css"; // Import the CSS file
 import { useNavigate, Link } from 'react-router-dom';
 import NotiBtn from "../notification/NotiBtn";
 
-
 const API_URL = "https://localhost:7150/api/Properties";
 
 const GetProperties = () => {
   const [property, setProperty] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem('user_id') || '');
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState(""); // State for search input
   const navigate = useNavigate();
   const propertiesPerPage = 6; // Number of properties per page
 
   useEffect(() => {
     if (userId.startsWith("T")) {
-    // if (userId) {
       loadProperty();
     }
   }, [userId]);
@@ -49,15 +48,20 @@ const GetProperties = () => {
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
   
-    const toggleDropdown = () => {
-      setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
-    };
+  const toggleDropdown = () => {
+    setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
+  };
   
-    const handleLogout = () => {
-      localStorage.removeItem("user_id");
-      localStorage.removeItem("token");
-      window.location.href = "/login"; // Redirect to login after logout
-    };
+  const handleLogout = () => {
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("token");
+    window.location.href = "/login"; // Redirect to login after logout
+  };
+
+  // Filter properties based on search input
+  const filteredProperties = property.filter(pr => 
+    pr.address.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="container getPropertiesContainer">
@@ -127,19 +131,35 @@ const GetProperties = () => {
         </div>
       </header>
 
+      <div className="search-bar" style={{ margin: "20px 0", textAlign: "center" }}>
+        <input 
+          type="text" 
+          placeholder="Search by address..." 
+          value={search} 
+          onChange={(e) => setSearch(e.target.value)} 
+          style={{
+            padding: "10px",
+            width: "80%",
+            maxWidth: "400px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
+          }}
+        />
+      </div>
+
       <div className="property-container">
-        {currentProperties.map((pr) => (
+        {filteredProperties.slice(indexOfFirstProperty, indexOfLastProperty).map((pr) => (
           <div className="property-card" key={pr.property_Id}>
-            <img src="https://tse2.mm.bing.net/th/id/OIP.uIMPvMRhXXG3rGddF6gxFgHaE8?w=1024&h=683&rs=1&pid=ImgDetMain" alt="Property" className="property-image" />
+            <img src={pr.image} alt="Property" className="property-image" />
             <div className="property-details">
               <h3>{pr.address}</h3>
               <p>{pr.description}</p>
               <p>Price: {pr.priceOfTheProperty}</p>
-              <p>Status: {pr.availableStatus}</p>
+              <p>Status: {pr.availableStatus === true ? "Available" : "Not Available"}</p> {/* Ensure status is displayed correctly */}
               <p>Owner ID: {pr.owner_Id}</p>
               <p>Owner Name: {pr.owner_Name}</p>
               <p>Phone Number: {pr.owner_PhoneNumber}</p>
-              <p>Signature: {pr.owner_Signature}</p>
               <button onClick={() =>navigate('/lease/tenant')}>apply</button>
             </div>
           </div>
@@ -147,7 +167,7 @@ const GetProperties = () => {
       </div>
 
       <div className="pagination">
-        {Array.from({ length: Math.ceil(property.length / propertiesPerPage) }, (_, index) => (
+        {Array.from({ length: Math.ceil(filteredProperties.length / propertiesPerPage) }, (_, index) => (
           <button key={index + 1} onClick={() => paginate(index + 1)}>
             {index + 1}
           </button>
