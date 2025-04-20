@@ -60,7 +60,7 @@ const GetProperties = () => {
     };
 
   return (
-    <div className="container">
+    <div className="container getPropertiesContainer">
       <header className="header">
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
         <div className="header-links">

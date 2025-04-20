@@ -18,13 +18,13 @@
 
 /* Notification button styling */
 .noti-btn {
-  background-color: transparent;
-  border: none;
-  font-size: 15px;
-  cursor: pointer;
-  color: #333;
-  padding: 0;
-  position: relative;
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  color: #333 !important;
+  padding: 0 !important;
+  position: relative !important;
 }
 
 .notification-popup {

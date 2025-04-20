@@ -205,13 +205,15 @@ const GetPayments = () => {
         </div>
       </header>
       {/* Back Arrow Button */}
-      <button
-        className="back-button"
-        onClick={() => navigate("/get")} // Navigate to Payments Home Page
-      >
-        ←
-      </button>
  
+      <div className="filter-container">
+        <button
+          className="back-button"
+          onClick={() => navigate("/get")} // Navigate to Payments Home Page
+        >
+          ←
+        </button>
+      </div>
       <div className="filter-container">
         <select
           className="filter-dropdown"

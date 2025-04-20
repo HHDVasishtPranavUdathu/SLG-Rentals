@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NotiBtn from "../notification/NotiBtn";
-// import "./LeasePayment.css"; // Importing CSS for styling
+import "./LeasePayment.css"; // Importing CSS for styling
 
 const userId = localStorage.getItem("user_id");
 const API_URL = `https://localhost:7150/api/Lease/GetLeasesByTenantId/${userId}`;
@@ -154,7 +154,7 @@ const LeasePayment = () => {
 
     return (
         
-            <div className="container">
+            <div className="container leaseContainer">
                 <header className="header">
                     <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
                     <div className="header-links">
@@ -211,6 +211,7 @@ const LeasePayment = () => {
                                             border: "none",
                                             color: "#333",
                                             cursor: "pointer",
+                                            fontSize: "14px",
                                         }}
                                     >
                                         Logout
