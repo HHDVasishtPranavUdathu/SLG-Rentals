@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NotiBtn from "./notification/NotiBtn";
 import axios from "axios";
-
+ 
 const MyProfile = () => {
     const [profile, setProfile] = useState(null); // State to hold profile data
     const [error, setError] = useState(null); // State to handle errors
-
+ 
     // Fetch the userId from localStorage
     const userId = localStorage.getItem("user_id"); // Make sure this key matches your app's setup
     const API_URL = `https://localhost:7150/api/Registrations/${userId}`;
-
+ 
     const [activeTab, setActiveTab] = useState("read");
     const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
     const [userRole, setUserRole] = useState(""); // State to determine user role (Tenant or Owner)
     const navigate = useNavigate();
-
+ 
     useEffect(() => {
         const userId = localStorage.getItem("user_id");
         // Determine user role based on user_id prefix
@@ -27,7 +27,7 @@ const MyProfile = () => {
             setUserRole("Unknown");
         }
     }, []);
-
+ 
     const handleLeaseNavigation = () => {
         if (userRole === "Tenant") {
             navigate("/lease/tenant"); // Navigate to tenant lease page
@@ -35,7 +35,15 @@ const MyProfile = () => {
             navigate("/lease/owner"); // Navigate to owner lease page
         }
     };
-
+ 
+    const handlePayNavigation = () => {
+        if (userRole === "Tenant") {
+            navigate("/postpayment"); // Navigate to tenant properties page
+        } else if (userRole === "Owner") {
+            navigate("/getpayowner"); // Navigate to owner post properties page
+        }
+    };
+ 
     const handlePropertiesNavigation = () => {
         if (userRole === "Tenant") {
             navigate("/GetProperties"); // Navigate to tenant properties page
@@ -43,17 +51,17 @@ const MyProfile = () => {
             navigate("/PostProperties"); // Navigate to owner post properties page
         }
     };
-
+ 
     const toggleDropdown = () => {
         setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
     };
-
+ 
     const handleLogout = () => {
         localStorage.removeItem("user_id");
         localStorage.removeItem("token");
         window.location.href = "/login"; // Redirect to login after logout
     };
-
+ 
     useEffect(() => {
         const fetchProfile = async () => {
             try {
@@ -69,18 +77,18 @@ const MyProfile = () => {
                 setError(err.message || "An error occurred while fetching the profile.");
             }
         };
-
+ 
         fetchProfile();
     }, [API_URL]);
-
+ 
     if (error) {
         return <p>Error: {error}</p>; // Render the error if any
     }
-
+ 
     if (!profile) {
         return <p>Loading...</p>; // Render a loading message until the data is fetched
     }
-
+ 
     return (
         <div className="container">
             <header className="header">
@@ -97,6 +105,18 @@ const MyProfile = () => {
                         }}
                     >
                         Lease
+                    </a>
+                    <a
+                        onClick={handlePayNavigation}
+                        className="link-default"
+                        style={{
+                            cursor: "pointer",
+                            background: "none",
+                            border: "none",
+                            color: "#007bff",
+                        }}
+                    >
+                        Payment
                     </a>
                     <a
                         onClick={handlePropertiesNavigation}
@@ -178,11 +198,68 @@ const MyProfile = () => {
                     <p><strong>Phone Number:</strong> {profile.phoneNumber}</p>
                     <p><strong>Date of Birth:</strong> {profile.d_O_B}</p>
                     <p><strong>Role:</strong> {profile.roleofUser}</p>
-                    <p><strong>Signature:</strong> {profile.signature}</p>
+                    <p><strong>Signature:</strong> {profile.signature}<br />(*do not share this)</p>
+                </div>
+                {/* Conditional Buttons Based on User Role */}
+                <div style={{ marginTop: "20px" }}>
+                    {userRole === "Tenant" ? (
+                        <div>
+                            Maintainance:
+                            <button
+                                onClick={() => navigate("/addmaintain")}
+                                style={{
+                                    backgroundColor: "#007BFF",
+                                    color: "#fff",
+                                    padding: "10px 20px",
+                                    margin: "10px",
+                                    border: "none",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Post request
+                            </button>
+                            <button
+                                onClick={() => navigate("/maintainreq")}
+                                style={{
+                                    backgroundColor: "#007BFF",
+                                    color: "#fff",
+                                    padding: "10px 20px",
+                                    margin: "10px",
+                                    border: "none",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Maintenance Request
+                            </button>
+                        </div>
+                    ) : userRole === "Owner" ? (
+                        <div>
+                            Maintainance:
+                            <button
+                                onClick={() => navigate("/OwnerReq")}
+                                style={{
+                                    backgroundColor: "#28a745",
+                                    color: "#fff",
+                                    padding: "10px 20px",
+                                    margin: "10px",
+                                    border: "none",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                See Request
+                            </button>
+                           
+                        </div>
+                    ) : (
+                        <p style={{ color: "red" }}>Invalid role! Please check your profile.</p>
+                    )}
                 </div>
             </div>
         </div>
     );
 };
-
+ 
 export default MyProfile;

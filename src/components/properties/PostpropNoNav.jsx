@@ -103,7 +103,7 @@ const PostProperty = () => {
                             <h3>{property.address}</h3>
                             <p>{property.description}</p>
                             <p>Price: {property.priceOfTheProperty}</p>
-                            <p>Status: {property.availableStatus}</p>
+                            <p>Status: {property.availableStatus === true ? "Available" : "Not Available"}</p>
                             <p>Owner ID: {property.owner_Id}</p>
                             <p>Owner Name: {property.owner_Name}</p>
                             <p>Phone Number: {property.owner_PhoneNumber}</p>

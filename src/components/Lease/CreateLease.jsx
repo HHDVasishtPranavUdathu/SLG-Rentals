@@ -79,9 +79,6 @@ const CreateLease = () => {
 
             setBannerMessage(responseText);
             setShowBanner(true);
-
-            // Navigate to the payment page after a successful submission
-            navigate("/payment");
         } catch (error) {
             console.error("Error while creating lease:", error.message);
             setBannerMessage("Failed to create lease. Please try again.");

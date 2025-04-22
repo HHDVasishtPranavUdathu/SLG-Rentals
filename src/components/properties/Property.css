@@ -47,4 +47,24 @@
     text-align: center;
     z-index: 1000;
   }
-  
+  .property-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.property-card {
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.property-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}

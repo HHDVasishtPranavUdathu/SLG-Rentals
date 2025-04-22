@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+ 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
+ 
 import Banner from '../Banner'; // Import the Banner component
 import './PasswordReset.css'; // Import the CSS file
-
+ 
 const PasswordReset = () => {
     const [user_id, setUserId] = useState('');
     const [answer, setAnswer] = useState('');
@@ -15,7 +15,7 @@ const PasswordReset = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [bannerMessage, setBannerMessage] = useState(''); // State for banner message
     const navigate = useNavigate();
-
+ 
     const handlePasswordReset = async (e) => {
         e.preventDefault();
         try {
@@ -28,6 +28,8 @@ const PasswordReset = () => {
             if (response.status === 200 && response.data.message === "Password reset successful!") {
                 setIsSuccess(true); // Set success state
                 setBannerMessage("Password reset successful!"); // Set banner message
+                localStorage.removeItem("user_id");
+                localStorage.removeItem("token");
             } else {
                 setIsSuccess(false); // Set error state
                 setBannerMessage("Password reset failed! Invalid answer or user ID."); // Set banner message
@@ -38,14 +40,14 @@ const PasswordReset = () => {
             setBannerMessage("Password reset failed! Please try again."); // Set banner message
         }
     };
-
+ 
     const closeBanner = () => {
         setBannerMessage(''); // Clear banner message
         if (isSuccess) {
             navigate('/login'); // Navigate to login after closing the banner if successful
         }
     };
-
+ 
     return (
         <div className="password-reset-container">
             {bannerMessage && <Banner message={bannerMessage} onClose={closeBanner} />} {/* Display banner if message exists */}
@@ -83,5 +85,6 @@ const PasswordReset = () => {
         </div>
     );
 };
-
+ 
 export default PasswordReset;
+ 

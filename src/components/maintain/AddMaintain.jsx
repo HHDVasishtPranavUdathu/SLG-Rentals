@@ -33,6 +33,7 @@ const AddMaintain = () => {
     try {
       const addUrl = `${API_URL}PropertyId=${formData.propertyId}&TenantId=${formData.tenantId}&Description=${formData.description}&Status=${formData.status}&ImagePath=${formData.imagePath}`;
       console.log(addUrl)
+      localStorage.getItem("user_id");
       const headers = {
         Authorization: `Bearer ${token}`,
       };
@@ -133,7 +134,7 @@ const AddMaintain = () => {
         }}
       >
         <div>
-          <label>Tenant ID:</label>
+          <label>Tenant ID:{"user_id"}</label>
           <input
             type="text"
             name="tenantId"
