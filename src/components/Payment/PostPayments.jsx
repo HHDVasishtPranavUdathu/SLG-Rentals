@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NotiBtn from "../notification/NotiBtn";
-// import "./LeasePayment.css"; // Importing CSS for styling
+import "./LeasePayment.css"; // Importing CSS for styling
 
 const userId = localStorage.getItem("user_id");
 const API_URL = `https://localhost:7150/api/Lease/GetLeasesByTenantId/${userId}`;
@@ -154,11 +154,12 @@ const LeasePayment = () => {
 
     return (
         
-            <div className="container">
+            <div className="container leaseContainer">
                 <header className="header">
                     <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
                     <div className="header-links">
                         <Link to="/lease/tenant" className="link-default">Lease</Link>
+                        <Link to="/postpayment" className="link-primary">Payment</Link>
                         <Link to="/GetProperties" className="link-primary">All Properties ↓</Link>
                         <NotiBtn />
                         {/* Profile Section with Dropdown */}
@@ -211,6 +212,7 @@ const LeasePayment = () => {
                                             border: "none",
                                             color: "#333",
                                             cursor: "pointer",
+                                            fontSize: "14px",
                                         }}
                                     >
                                         Logout
@@ -226,7 +228,7 @@ const LeasePayment = () => {
                     alignItems: "center",
                 }}>
                     <h1 style={{ marginLeft: "20px" }}>Leased Properties</h1>
-                    <Link to="/post" style={{ textDecoration: "none", marginRight: "10px" }}>Payment Hisory</Link>
+                    <Link to="/getpayments" style={{ textDecoration: "none", marginRight: "10px" }}>Payment Hisory</Link>
                 </div>
                 <div className="contain">
                     <h2>Lease Payment System</h2>
@@ -295,10 +297,15 @@ const LeasePayment = () => {
                       required
                     /> */}
                                     </div>
-                                    <button type="submit">Add Payment</button>
-                                    <button type="button" onClick={resetForm}>
-                                        Cancel
-                                    </button>
+                                    <div style={{
+                                        display: "flex",
+                                        gap: "10px",
+                                    }}>
+                                        <button type="submit">Add Payment</button>
+                                        <button type="button" onClick={resetForm}>
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </form>
                                 {payError && <h5 style={{ color: "red" }}>{payError}</h5>}
                                 {sucess && <h5 style={{ color: "blue" }}>Payment completed successfully!</h5>}

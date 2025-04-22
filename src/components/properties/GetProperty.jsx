@@ -12,7 +12,7 @@ const GetProperties = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState(""); // State for search input
   const navigate = useNavigate();
-  const propertiesPerPage = 6; // Number of properties per page
+  const propertiesPerPage = 4; // Number of properties per page
 
   useEffect(() => {
     if (userId.startsWith("T")) {
@@ -64,11 +64,12 @@ const GetProperties = () => {
   );
 
   return (
-    <div className="container">
+    <div className="container getPropertiesContainer">
       <header className="header">
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
         <div className="header-links">
           <Link to="/lease/tenant" className="link-default">Lease</Link>
+          <Link to="/postpayment" className="link-primary">Payment</Link>
           <Link to="/GetProperties" className="link-primary">All Properties ↓</Link>
           <NotiBtn/>
           {/* Profile Section with Dropdown */}

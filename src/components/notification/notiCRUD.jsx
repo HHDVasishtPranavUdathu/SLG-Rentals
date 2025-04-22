@@ -38,6 +38,14 @@ const NotificationCRUD = () => {
         }
     };
 
+    const handlePayNavigation = () => {
+        if (userRole === "Tenant") {
+            navigate("/postpayment"); // Navigate to tenant properties page
+        } else if (userRole === "Owner") {
+            navigate("/getpayowner"); // Navigate to owner post properties page
+        }
+    };
+
     const toggleDropdown = () => {
         setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
     };
@@ -63,6 +71,18 @@ const NotificationCRUD = () => {
                         }}
                     >
                         Lease
+                    </a>
+                    <a
+                        onClick={handlePayNavigation}
+                        className="link-default"
+                        style={{
+                            cursor: "pointer",
+                            background: "none",
+                            border: "none",
+                            color: "#007bff",
+                        }}
+                    >
+                        Payment
                     </a>
                     <a
                         onClick={handlePropertiesNavigation}

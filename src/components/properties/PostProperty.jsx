@@ -4,10 +4,10 @@ import Banner from "../Banner";
 import './Property.css';
 import NotiBtn from "../notification/NotiBtn";
 import { useNavigate, Link } from 'react-router-dom';
-
-
+ 
+ 
 const API_URL = "https://localhost:7150/api/Properties";
-
+ 
 const PostProperty = () => {
     const [formData, setFormData] = useState({
         address: "",
@@ -21,13 +21,13 @@ const PostProperty = () => {
     const [bannerMessage, setBannerMessage] = useState("");
     const userId = localStorage.getItem('user_id') || ''; // Automatically fetch owner ID
     const token = localStorage.getItem('token');
-
+ 
     useEffect(() => {
         if (userId) {
             fetchPropertiesByUserId(userId);
         }
     }, [userId]);
-
+ 
     const fetchPropertiesByUserId = async (userId) => {
         try {
             const response = await axios.get(`${API_URL}/owner/${userId}`, {
@@ -41,17 +41,17 @@ const PostProperty = () => {
             setBannerMessage(`No properties found for owner ID: ${userId}`);
         }
     };
-
+ 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { address, description, priceOfTheProperty, availableStatus, owner_Signature, image } = formData;
-    
+   
         if (!address || !description || !priceOfTheProperty || !availableStatus || !owner_Signature || !image) {
             setBannerMessage("All fields are required."); // Show error in the banner
             return;
         }
         console.log("Form data being sent:", formData);
-    
+   
         try {
             const response = await axios.post(API_URL, new URLSearchParams({
                 address,
@@ -67,7 +67,7 @@ const PostProperty = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-    
+   
             setFormData({
                 address: "",
                 description: "",
@@ -87,10 +87,10 @@ const PostProperty = () => {
             }
         }
     };
-    
-
+   
+ 
     const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
-
+ 
     const toggleDropdown = () => {
         setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
     };
@@ -102,19 +102,20 @@ const PostProperty = () => {
             console.error("Error deleting property:", error);
         }
     };
-
+ 
     const handleLogout = () => {
         localStorage.removeItem("user_id");
         localStorage.removeItem("token");
         window.location.href = "/login"; // Redirect to login after logout
     };
-
+ 
     return (
         <div className="container">
             <header className="header">
                 <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
                 <div className="header-links">
                     <Link to="/lease/owner" className="link-default">Lease</Link>
+                    <Link to="/getpayowner" className="link-default">Payment</Link>
                     <Link to="/PostProperties" className="link-primary">All Properties ↓</Link>
                     <NotiBtn />
                     {/* Profile Section with Dropdown */}
@@ -255,7 +256,7 @@ const PostProperty = () => {
         properties.map((property) => (
             <div className="property-card" key={property.property_Id} style={{ flex: '1 1 calc(33.333% - 20px)', boxSizing: 'border-box', border: '1px solid #ccc', borderRadius: '5px', padding: '20px', backgroundColor: '#fff', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
                 <img src={property.image} alt="Property" className="property-image" style={{ width: '100%', height: 'auto', borderRadius: '5px' }} />
-                <h3>Property Id:{property.property_Id}</h3>
+                <h4>Property Id: {property.property_Id}</h4>
                 <h3>{property.address}</h3>
                 <p>{property.description}</p>
                 <p>Price: {property.priceOfTheProperty}</p>
@@ -286,11 +287,11 @@ const PostProperty = () => {
         <p>No properties found for owner ID: {userId}</p>
     )}
 </div>
-
-
-
+ 
+ 
+ 
         </div>
     );
 };
-
+ 
 export default PostProperty;

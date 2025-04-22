@@ -1,70 +1,65 @@
-/* Property.css */
-
-  
-  h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  input, select {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  span {
-    color: red;
-    font-size: 12px;
-  }
-  
-  .banner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #ffcc00;
-    color: #000;
-    padding: 10px;
-    text-align: center;
-    z-index: 1000;
-  }
-  .property-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+h2 {
+  text-align: center;
+  color: #333;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
 .property-card {
-    flex: 1 1 calc(33.333% - 20px);
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(25% - 20px); /* 4 cards in one row */
+  max-width: calc(25% - 20px); /* Ensures cards stay within bounds */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px; /* Slightly more padding */
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease;
+}
+ 
+.property-card:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Added hover effect */
+}
+ 
+.property-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+}
+input, select {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.property-image {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+span {
+  color: red;
+  font-size: 12px;
+}
+
+.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffcc00;
+  color: #000;
+  padding: 10px;
+  text-align: center;
+  z-index: 1000;
 }

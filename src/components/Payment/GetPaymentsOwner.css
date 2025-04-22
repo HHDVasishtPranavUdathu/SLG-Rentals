@@ -52,18 +52,18 @@
 }
  
 .button-green {
-  background-color: green;
-  color: white;
+  background-color: green !important;
+  color: rgb(0, 0, 0);
 }
  
 .button-red {
-  background-color: red;
-  color: white;
+  background-color: red !important;
+  color: red;
 }
  
 .button-gray {
   background-color: gray;
-  color: white;
+  color: gray;
 }
  
 .payment-details{

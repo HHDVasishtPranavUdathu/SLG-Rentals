@@ -23,6 +23,7 @@ export default function Hero2() {
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
         <div className="header-links">
           <Link to="/lease/owner" className="link-default">Lease</Link>
+          <Link to="/getpayowner" className="link-default">Payment</Link>
           <Link to="/PostProperties" className="link-primary">My Properties ↓</Link>
           <NotiBtn/>
           {/* Profile Section with Dropdown */}

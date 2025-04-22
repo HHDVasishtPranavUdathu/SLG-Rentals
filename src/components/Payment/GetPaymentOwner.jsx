@@ -14,6 +14,7 @@ const GetPaymentsByOwnerId = () => {
     const [selectedPayment, setSelectedPayment] = useState(null); // To track the selected payment for updating
     const token = localStorage.getItem("token");
     const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
+    const navigate = useNavigate();
 
     const toggleDropdown = () => {
         setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
@@ -94,6 +95,7 @@ const GetPaymentsByOwnerId = () => {
                 <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
                 <div className="header-links">
                     <Link to="/lease/owner" className="link-default">Lease</Link>
+                    <Link to="/getpayowner" className="link-default">Payment</Link>
                     <Link to="/PostProperties" className="link-primary">Properties</Link>
                     <NotiBtn />
                     {/* Profile Section with Dropdown */}
@@ -155,6 +157,8 @@ const GetPaymentsByOwnerId = () => {
                     </div>
                 </div>
             </header>
+            
+            {/* <button style={{position: 'fixed', right: '10px', margin:'10px', bottom:'10px' }} onClick={()=>navigate('/tenantinfo')}>check tenant history</button> */}
             <h2>Payment for owner</h2>
             {loading && <p>Loading payments...</p>}
             {error && <p className="error-message">{error}</p>}

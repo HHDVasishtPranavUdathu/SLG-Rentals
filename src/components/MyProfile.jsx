@@ -35,7 +35,7 @@ const MyProfile = () => {
             navigate("/lease/owner"); // Navigate to owner lease page
         }
     };
- 
+
     const handlePayNavigation = () => {
         if (userRole === "Tenant") {
             navigate("/postpayment"); // Navigate to tenant properties page
@@ -43,7 +43,7 @@ const MyProfile = () => {
             navigate("/getpayowner"); // Navigate to owner post properties page
         }
     };
- 
+
     const handlePropertiesNavigation = () => {
         if (userRole === "Tenant") {
             navigate("/GetProperties"); // Navigate to tenant properties page
@@ -251,7 +251,7 @@ const MyProfile = () => {
                             >
                                 See Request
                             </button>
-                           
+                            
                         </div>
                     ) : (
                         <p style={{ color: "red" }}>Invalid role! Please check your profile.</p>

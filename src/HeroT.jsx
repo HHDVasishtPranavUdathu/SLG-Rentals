@@ -23,6 +23,7 @@ export default function HeroT() {
         <div className="header-links">
           <Link to="/lease/tenant" className="link-default">Lease</Link>
           <Link to="/GetProperties" className="link-primary">All Properties ↓</Link>
+          <Link to="/postpayment" className="link-primary">Payment</Link>
           <NotiBtn/>
           {/* Profile Section with Dropdown */}
           <div className="profile-section" style={{ position: "relative", cursor: "pointer" }}>
@@ -92,7 +93,7 @@ export default function HeroT() {
 
         <div className="button-group">
            <a href="#not" className="btn-primary">See All Properties ↓</a>
-          <Link to="/reg" className="btn-secondary">Register</Link>
+          <Link to="/lease/tenant" className="btn-secondary">Lease</Link>
         </div>
 
         <div className="preview-images">

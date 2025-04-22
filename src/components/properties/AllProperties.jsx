@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AllProperties.css"; // Import the CSS file
 import { useNavigate } from 'react-router-dom';
-
+ 
 const API_URL = "https://localhost:7150/api/Properties";
-
+ 
 const AllProperties = () => {
   const [property, setProperty] = useState([]);
   const [userId, setUserId] = useState(localStorage.getItem('user_id') || '');
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const propertiesPerPage = 4;
-
+ 
   useEffect(() => {
     loadProperty();
   }, [userId]);
-
+ 
   const loadProperty = async () => {
     try {
       const response = await axios.get(API_URL);
@@ -25,7 +25,7 @@ const AllProperties = () => {
       console.error("Error fetching properties:", error);
     }
   };
-
+ 
   const deleteProperty = async (id) => {
     try {
       await axios.delete(`${API_URL}/${id}`);
@@ -34,14 +34,14 @@ const AllProperties = () => {
       console.error("Error deleting property:", error);
     }
   };
-
+ 
   // Pagination logic
   const indexOfLastProperty = currentPage * propertiesPerPage;
   const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
   const currentProperties = property.slice(indexOfFirstProperty, indexOfLastProperty);
-
+ 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+ 
   return (
     <div className="container">
       <h4>All the properties we offer:</h4>
@@ -62,7 +62,7 @@ const AllProperties = () => {
           </div>
         ))}
       </div>
-
+ 
       <div className="pagination">
         {Array.from({ length: Math.ceil(property.length / propertiesPerPage) }, (_, index) => (
           <button key={index + 1} onClick={() => paginate(index + 1)}>
@@ -73,5 +73,5 @@ const AllProperties = () => {
     </div>
   );
 };
-
+ 
 export default AllProperties;
