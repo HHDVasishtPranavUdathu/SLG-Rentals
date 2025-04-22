@@ -22,6 +22,7 @@ import AllOwnerReq from "./components/maintain/AllOwnerReq";
 import LeasePayment from "./components/Payment/PostPayments";
 import GetPayments from "./components/Payment/GetPayments";
 import GetPaymentsByOwnerId from "./components/Payment/GetPaymentOwner";
+import OwnerTenantHistory from "./components/Payment/GetHistory";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
         <Route path="/AllProperties" element={<AllProperties/>} />
 
         
-
+        <Route path="/Tenantinfo" element={<ProtectedRoute element={<OwnerTenantHistory/>} role="owner" />} />
         <Route path="/me" element={<ProtectedRoute element={<MyProfile/>} />} />
         <Route path="/noti" element={<ProtectedRoute element={<NotificationCRUD />} />} />
         <Route path="/lease/owner" element={<ProtectedRoute element={<OwnerLease />} role="owner" />} />
