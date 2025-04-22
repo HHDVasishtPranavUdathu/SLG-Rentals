@@ -53,17 +53,17 @@
  
 .button-green {
   background-color: green !important;
-  color: white;
+  color: rgb(0, 0, 0);
 }
  
 .button-red {
   background-color: red !important;
-  color: white;
+  color: red;
 }
  
 .button-gray {
   background-color: gray;
-  color: white;
+  color: gray;
 }
  
 .payment-details{

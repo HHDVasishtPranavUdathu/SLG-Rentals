@@ -143,6 +143,7 @@ const GetPayments = () => {
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
         <div className="header-links">
           <Link to="/lease/tenant" className="link-default">Lease</Link>
+          <Link to="/postpayment" className="link-primary">Payment</Link>
           <Link to="/GetProperties" className="link-primary">All Properties ↓</Link>
           <NotiBtn />
           {/* Profile Section with Dropdown */}
@@ -209,7 +210,7 @@ const GetPayments = () => {
       <div className="filter-container">
         <button
           className="back-button"
-          onClick={() => navigate("/get")} // Navigate to Payments Home Page
+          onClick={() => navigate("/postpayments")} // Navigate to Payments Home Page
         >
           ←
         </button>

@@ -48,7 +48,7 @@ const AllProperties = () => {
       <div className="property-container">
         {currentProperties.map((pr) => (
           <div className="property-card" key={pr.property_Id}>
-            <img src={pr.image} alt="Property" className="property-image" />
+            <img src={pr.iimage} alt="Property" className="property-image" />
             <div className="property-details">
               <p>Property at</p>
               <h3>{pr.address}</h3>

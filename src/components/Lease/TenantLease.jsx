@@ -24,6 +24,7 @@ const TenantLease = () => {
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
         <div className="header-links">
           <Link to="/lease/tenant" className="link-default">Lease</Link>
+          <Link to="/postpayment" className="link-primary">Payment</Link>
           <Link to="/GetProperties" className="link-primary">All Properties ↓</Link>
           <NotiBtn />
           {/* Profile Section with Dropdown */}

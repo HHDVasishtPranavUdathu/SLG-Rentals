@@ -159,6 +159,7 @@ const LeasePayment = () => {
                     <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
                     <div className="header-links">
                         <Link to="/lease/tenant" className="link-default">Lease</Link>
+                        <Link to="/postpayment" className="link-primary">Payment</Link>
                         <Link to="/GetProperties" className="link-primary">All Properties ↓</Link>
                         <NotiBtn />
                         {/* Profile Section with Dropdown */}
@@ -227,7 +228,7 @@ const LeasePayment = () => {
                     alignItems: "center",
                 }}>
                     <h1 style={{ marginLeft: "20px" }}>Leased Properties</h1>
-                    <Link to="/post" style={{ textDecoration: "none", marginRight: "10px" }}>Payment Hisory</Link>
+                    <Link to="/getpayments" style={{ textDecoration: "none", marginRight: "10px" }}>Payment Hisory</Link>
                 </div>
                 <div className="contain">
                     <h2>Lease Payment System</h2>

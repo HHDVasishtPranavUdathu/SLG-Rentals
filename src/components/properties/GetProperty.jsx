@@ -12,7 +12,7 @@ const GetProperties = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState(""); // State for search input
   const navigate = useNavigate();
-  const propertiesPerPage = 6; // Number of properties per page
+  const propertiesPerPage = 4; // Number of properties per page
 
   useEffect(() => {
     if (userId.startsWith("T")) {
@@ -69,6 +69,7 @@ const GetProperties = () => {
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
         <div className="header-links">
           <Link to="/lease/tenant" className="link-default">Lease</Link>
+          <Link to="/postpayment" className="link-primary">Payment</Link>
           <Link to="/GetProperties" className="link-primary">All Properties ↓</Link>
           <NotiBtn/>
           {/* Profile Section with Dropdown */}
@@ -151,7 +152,7 @@ const GetProperties = () => {
       <div className="property-container">
         {filteredProperties.slice(indexOfFirstProperty, indexOfLastProperty).map((pr) => (
           <div className="property-card" key={pr.property_Id}>
-            <img src={pr.image} alt="Property" className="property-image" />
+            <img src={pr.iimage} alt="Property" className="property-image" />
             <div className="property-details">
               <h3>{pr.address}</h3>
               <p>{pr.description}</p>

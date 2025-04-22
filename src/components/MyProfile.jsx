@@ -36,6 +36,14 @@ const MyProfile = () => {
         }
     };
 
+    const handlePayNavigation = () => {
+        if (userRole === "Tenant") {
+            navigate("/postpayment"); // Navigate to tenant properties page
+        } else if (userRole === "Owner") {
+            navigate("/getpayowner"); // Navigate to owner post properties page
+        }
+    };
+
     const handlePropertiesNavigation = () => {
         if (userRole === "Tenant") {
             navigate("/GetProperties"); // Navigate to tenant properties page
@@ -97,6 +105,18 @@ const MyProfile = () => {
                         }}
                     >
                         Lease
+                    </a>
+                    <a
+                        onClick={handlePayNavigation}
+                        className="link-default"
+                        style={{
+                            cursor: "pointer",
+                            background: "none",
+                            border: "none",
+                            color: "#007bff",
+                        }}
+                    >
+                        Payment
                     </a>
                     <a
                         onClick={handlePropertiesNavigation}
@@ -178,7 +198,64 @@ const MyProfile = () => {
                     <p><strong>Phone Number:</strong> {profile.phoneNumber}</p>
                     <p><strong>Date of Birth:</strong> {profile.d_O_B}</p>
                     <p><strong>Role:</strong> {profile.roleofUser}</p>
-                    <p><strong>Signature:</strong> {profile.signature}</p>
+                    <p><strong>Signature:</strong> {profile.signature}<br />(*do not share this)</p>
+                </div>
+                {/* Conditional Buttons Based on User Role */}
+                <div style={{ marginTop: "20px" }}>
+                    {userRole === "Tenant" ? (
+                        <div>
+                            Maintainance:
+                            <button
+                                onClick={() => navigate("/addmaintain")}
+                                style={{
+                                    backgroundColor: "#007BFF",
+                                    color: "#fff",
+                                    padding: "10px 20px",
+                                    margin: "10px",
+                                    border: "none",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Post request
+                            </button>
+                            <button
+                                onClick={() => navigate("/maintainreq")}
+                                style={{
+                                    backgroundColor: "#007BFF",
+                                    color: "#fff",
+                                    padding: "10px 20px",
+                                    margin: "10px",
+                                    border: "none",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Maintenance Request
+                            </button>
+                        </div>
+                    ) : userRole === "Owner" ? (
+                        <div>
+                            Maintainance:
+                            <button
+                                onClick={() => navigate("/OwnerReq")}
+                                style={{
+                                    backgroundColor: "#28a745",
+                                    color: "#fff",
+                                    padding: "10px 20px",
+                                    margin: "10px",
+                                    border: "none",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                See Request
+                            </button>
+                            
+                        </div>
+                    ) : (
+                        <p style={{ color: "red" }}>Invalid role! Please check your profile.</p>
+                    )}
                 </div>
             </div>
         </div>

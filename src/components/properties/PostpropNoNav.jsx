@@ -99,7 +99,7 @@ const PostProperty = () => {
                 {properties.length > 0 ? (
                     properties.map((property) => (
                         <div className="property-card" key={property.property_Id}>
-                            <img src={property.image} alt="Property" className="property-image" />
+                            <img src={property.iimage} alt="Property" className="property-image" />
                             <h3>{property.address}</h3>
                             <p>{property.description}</p>
                             <p>Price: {property.priceOfTheProperty}</p>

@@ -28,6 +28,8 @@ const PasswordReset = () => {
             if (response.status === 200 && response.data.message === "Password reset successful!") {
                 setIsSuccess(true); // Set success state
                 setBannerMessage("Password reset successful!"); // Set banner message
+                localStorage.removeItem("user_id");
+                localStorage.removeItem("token");
             } else {
                 setIsSuccess(false); // Set error state
                 setBannerMessage("Password reset failed! Invalid answer or user ID."); // Set banner message
