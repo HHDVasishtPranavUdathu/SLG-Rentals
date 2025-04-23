@@ -194,9 +194,9 @@ const OwnerReq = () => {
             <p><strong>Description:</strong> {selectedRequest.description}</p>
             <p><strong>Status:</strong> {selectedRequest.status}</p>
             <p><strong>Image Path:</strong> {selectedRequest.imagePath}</p>
-            <button onClick={() => handleStatusChange(selectedRequest.requestId, "Approved")}>Approve</button>
-            <button onClick={() => handleStatusChange(selectedRequest.requestId, "Rejected")}>Reject</button>
-            <button onClick={() => setSelectedRequest(null)}>Close</button>
+            <button style={{ backgroundColor: '#007BFF', color: '#fff', border: 'none', padding: '10px 20px', cursor: 'pointer', borderRadius: '5px' , margin:'5px'}} onClick={() => handleStatusChange(selectedRequest.requestId, "Approved")}>Approve</button>
+            <button style={{ backgroundColor: '#007BFF', color: '#fff', border: 'none', padding: '10px 20px', cursor: 'pointer', borderRadius: '5px' ,margin:'5px'}} onClick={() => handleStatusChange(selectedRequest.requestId, "Rejected")}>Reject</button>
+            <button style={{ backgroundColor: '#007BFF', color: '#fff', border: 'none', padding: '10px 20px', cursor: 'pointer', borderRadius: '5px' ,margin:'5px'}} onClick={() => setSelectedRequest(null)}>Close</button>
           </div>
         </div>
       )}

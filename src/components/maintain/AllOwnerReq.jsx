@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {Link, useNavigate } from "react-router-dom"; // Ensure useNavigate is imported
+import { Link, useNavigate } from "react-router-dom"; // Ensure useNavigate is imported
 import axios from "axios";
 import NotiBtn from "../notification/NotiBtn";
 const API_URL = "https://localhost:7150/api/Maintainances/all_owner";
- 
+
 const AllOwnerReq = () => {
   const [requests, setRequests] = useState([]);
   const [formData, setFormData] = useState({ owner_Id: '' });
@@ -12,16 +12,16 @@ const AllOwnerReq = () => {
   const navigate = useNavigate();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
   
-    const toggleDropdown = () => {
-      setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
-    };
-  
-    const handleLogout = () => {
-      localStorage.removeItem("user_id");
-      localStorage.removeItem("token");
-      window.location.href = "/login"; // Redirect to login after logout
-    };
- 
+  const toggleDropdown = () => {
+    setIsDropdownVisible((prev) => !prev); // Toggle dropdown visibility
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("token");
+    window.location.href = "/login"; // Redirect to login after logout
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
@@ -39,25 +39,30 @@ const AllOwnerReq = () => {
           },
         });
         console.log('Response data:', response.data); // Log the response data
- 
+
         // Assuming response.data is an array of requests
         setRequests(response.data);
       } catch (error) {
         console.error('Authentication failed:', error);
       }
     };
- 
+
     fetchUserData();
   }, [navigate, formData.owner_Id]);
- 
+
   // Get current requests
   const indexOfLastRequest = currentPage * requestsPerPage;
   const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
   const currentRequests = requests.slice(indexOfFirstRequest, indexOfLastRequest);
- 
+
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
- 
+
+  // Handle view details button click
+  const viewDetails = (requestId) => {
+    navigate(`/request-details/${requestId}`);
+  };
+
   return (
     <div className="container">
       <header className="header">
@@ -126,8 +131,8 @@ const AllOwnerReq = () => {
         </div>
       </header>
       <h2>All Owner Requests</h2>
- 
-      <table border="1">
+
+      <table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr>
             <th>Request Id</th>
@@ -136,6 +141,7 @@ const AllOwnerReq = () => {
             <th>Description</th>
             <th>Status</th>
             <th>Image_optional</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -147,14 +153,19 @@ const AllOwnerReq = () => {
               <td>{rq.description}</td>
               <td>{rq.status}</td>
               <td>{rq.imagePath}</td>
+              <td>
+                <button onClick={() => viewDetails(rq.requestId)} style={{ backgroundColor: '#007bff', color: '#fff', border: 'none', padding: '5px 10px', cursor: 'pointer', borderRadius: '3px' }}>
+                  View Details
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
- 
-      <div className="pagination">
+
+      <div className="pagination" style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
         {Array.from({ length: Math.ceil(requests.length / requestsPerPage) }, (_, index) => (
-          <button key={index + 1} onClick={() => paginate(index + 1)}>
+          <button key={index + 1} onClick={() => paginate(index + 1)} style={{ backgroundColor: '#007bff', color: '#fff', border: 'none', padding: '5px 10px', cursor: 'pointer', borderRadius: '3px', margin: '0 5px' }}>
             {index + 1}
           </button>
         ))}
@@ -162,5 +173,5 @@ const AllOwnerReq = () => {
     </div>
   );
 };
- 
+
 export default AllOwnerReq;

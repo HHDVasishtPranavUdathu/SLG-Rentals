@@ -24,8 +24,8 @@ form {
  
 .property-image {
   width: 100%;
-  height: auto;
-  border-radius: 8px 8px 0 0;
+  height: 100%;
+  object-fit: contain;
 }
 input, select {
   margin-bottom: 10px;

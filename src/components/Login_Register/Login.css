@@ -1,7 +1,8 @@
 .login-container {
     display: flex;
-    height: 100vh;
-    background-color: #f8f9fa;
+    height: 50vh;
+    /* background-color: #0080ff; */
+    /* background-color: #f8f9fa; */
 }
 
 .login-image {
@@ -23,10 +24,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2rem;
+    padding: 0rem;
     background-color: white;
-    border-radius: 0 1rem 1rem 0;
+    border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100%;
 }
 
 .login-form h2 {
@@ -101,3 +103,8 @@
 .sign-up:hover {
     text-decoration: underline;
 }
+
+#not{
+    padding: 0px;
+}
+
