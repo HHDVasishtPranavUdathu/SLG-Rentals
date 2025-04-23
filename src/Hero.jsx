@@ -6,7 +6,7 @@ import RentalTranslations from "./RentalTranslations"; // Import the RentalTrans
 
 export default function Hero() {
   return (
-    <main className="container">
+    <main className="container" id="home">
       {/* Header Section */}
       <header className="header">
         <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
@@ -66,6 +66,8 @@ export default function Hero() {
         {/* All Properties Section */}
         <div id="not">
           <AllProperties />
+          <a href="#home"><button style={{position: 'fixed', right: '10px', margin:'10px', bottom:'10px' ,fontSize:"30px"}}>↑</button></a>
+
         </div>
       </section>
     </main>

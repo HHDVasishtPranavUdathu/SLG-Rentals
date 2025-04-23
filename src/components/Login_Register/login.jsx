@@ -54,7 +54,7 @@ const Login = () => {
             <header className="header">
                 <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
                 <div className="header-links">
-                    <Link to="/login" className="link-default">Login</Link>
+                    <Link to="/" className="link-default">Home</Link>
                     <Link to="/reg" className="link-default">Register</Link>
                     <a href="#not" className="link-default">See Properties ↓</a>
                 </div>
@@ -64,6 +64,7 @@ const Login = () => {
             <section className="hero" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', height: 'calc(100vh - 60px)', paddingTop: '60px' }}>
                 <div className="left-side" style={{ flex: 1, padding: '20px' }}>
                     {/* Dynamic Title from RentalTranslations */}
+                    <img src="https://github.com/HHDVasishtPranavUdathu/SLG-Rentals/blob/main/src/components/Image%20(1).jpg?raw=true" alt="logo" style={{height: "150px", border:"5px black solid", borderRadius:"50%"}} />
                     <RentalTranslations />
                     <p className="hero-subtitle">
                         Sri Lakshmi Ganapathi Rentals:<br />

@@ -4,7 +4,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import './Registration.css';
 import Banner from "../Banner"; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import RentalTranslations from "../../RentalTranslations";
+import Login from "./login";
+import AllProperties from "../properties/AllProperties";
  
 const API_URL = "https://localhost:7150/api/Registrations";
  
@@ -21,7 +24,9 @@ const validationSchema = yup.object({
     phoneNumber: yup.string()
         .matches(/^\d{10}$/, "Phone number should contain exactly 10 digits.")
         .required("PhoneNumber is required."),
-    d_O_B: yup.date().required("Date of Birth is required."),
+    d_O_B: yup.date()
+    .max(new Date(), "Date of Birth must be in the past.")
+    .required("Date of Birth is required."),
     password: yup.string()
         .min(6, "Password must be at least 6 characters long.")
         .matches(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$/, "Password must contain at least one uppercase letter, one special character, and one number.")
@@ -108,112 +113,157 @@ const RegistrationForm = () => {
     const closeBanner = () => {
         setBannerMessage(""); // Clear banner message
     };
- 
     return (
-        <div>
-            {bannerMessage && <Banner message={bannerMessage} onClose={closeBanner} />} {/* Display banner if message exists */}
-            <h2 className="text-center">Registration Management</h2>
-            <form onSubmit={formik.handleSubmit} className="registration-form">
-                <label htmlFor="id">ID</label>
-                <input
-                    type="text"
-                    name="id"
-                    id="id"
-                    value={formik.values.id}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    placeholder="ID"
-                    required
-                />
-                {formik.touched.id && formik.errors.id ? <div className="error">{formik.errors.id}</div> : null}
-               
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    value={formik.values.name}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    placeholder="Name"
-                    required
-                />
-                {formik.touched.name && formik.errors.name ? <div className="error">{formik.errors.name}</div> : null}
-               
-                <label htmlFor="phoneNumber">Phone Number</label>
-                <input
-                    type="text"
-                    name="phoneNumber"
-                    id="phoneNumber"
-                    value={formik.values.phoneNumber}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    placeholder="Phone Number"
-                    required
-                />
-                {formik.touched.phoneNumber && formik.errors.phoneNumber ? <div className="error">{formik.errors.phoneNumber}</div> : null}
-               
-                <label htmlFor="d_O_B">Date of Birth</label>
-                <input
-                    type="date"
-                    name="d_O_B"
-                    id="d_O_B"
-                    value={formik.values.d_O_B}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    placeholder="Date of Birth"
-                    required
-                />
-                {formik.touched.d_O_B && formik.errors.d_O_B ? <div className="error">{formik.errors.d_O_B}</div> : null}
-               
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    placeholder="Password"
-                    required
-                />
-                {formik.touched.password && formik.errors.password ? <div className="error">{formik.errors.password}</div> : null}
-               
-                <label htmlFor="answer">Name of Your Primary School??????</label>
-                <input
-                    type="text"
-                    name="answer"
-                    id="answer"
-                    value={formik.values.answer}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    placeholder="Answer"
-                    required
-                />
-                {formik.touched.answer && formik.errors.answer ? <div className="error">{formik.errors.answer}</div> : null}
-               
-                <label htmlFor="roleofUser">Role of User</label>
-                <select
-                    name="roleofUser"
-                    id="roleofUser"
-                    value={formik.values.roleofUser}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    className="dropdown"
-                    required
-                >
-                    <option value="" label="Select role" />
-                    <option value="o" label="Owner" />
-                    <option value="t" label="Tenant" />
-                </select>
-                {formik.touched.roleofUser && formik.errors.roleofUser ? <div className="error">{formik.errors.roleofUser}</div> : null}
-               
-                <button type="submit">Register</button>
-                <button type="button" onClick={formik.resetForm}>Reset</button>
-            </form>
-        </div>
+        <main className="container">
+            {/* Header Section */}
+            <header className="header">
+                <div className="header-title">Sri Lakshmi Ganapathi Rentals</div>
+                <div className="header-links">
+                    <Link to="/login" className="link-default">Login</Link>
+                    <Link to="/reg" className="link-default">Register</Link>
+                    <a href="#not" className="link-default">See Properties ↓</a>
+                </div>
+            </header>
+    
+            {/* Hero Section */}
+            <section className="hero" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', height: 'calc(100vh - 60px)', paddingTop: '60px' }}>
+                <div className="left-side" style={{ flex: 1, padding: '20px' }}>
+                    {/* Dynamic Title from RentalTranslations */}
+                    <img src="https://github.com/HHDVasishtPranavUdathu/SLG-Rentals/blob/main/src/components/Image%20(1).jpg?raw=true" alt="logo" style={{height: "150px", border:"5px black solid", borderRadius:"50%"}} />
+                    <RentalTranslations />
+                    <p className="hero-subtitle">
+                        Sri Lakshmi Ganapathi Rentals:<br />
+                        <b>Not NATIONAL, It's INTERNATIONAL!</b><br />
+                        Thaggede Le! 😎
+                    </p>
+                    <div className="button-group">
+                        <a href="/login" className="btn-primary">LOGIN ↓</a>
+                        {/* <Link to="/reg" className="btn-secondary">Register</Link> */}
+                    </div>
+                    <p className="hero-footer">
+                        Design Resource trusted by over 1,00,000++ customers 😂🤣
+                    </p>
+                </div>
+    
+                {/* Registration Form */}
+                <div className="registration-container" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '200px', overflowY: 'auto', maxHeight: '70vh' }}>
+                    {bannerMessage && <Banner message={bannerMessage} onClose={closeBanner} />} {/* Display banner if message exists */}
+                    <div className="registration-form" style={{ width: '100%', maxWidth: '400px' }}>
+                        <h2 style={{ textAlign: 'center' }}>Registration</h2>
+                        <form onSubmit={formik.handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                            <label htmlFor="id">ID</label>
+                            <input
+                                type="text"
+                                name="id"
+                                id="id"
+                                value={formik.values.id}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                placeholder="ID"
+                                required
+                                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+                            />
+                            {formik.touched.id && formik.errors.id ? <div className="error" style={{ color: 'red' }}>{formik.errors.id}</div> : null}
+    
+                            <label htmlFor="name">Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                placeholder="Name"
+                                required
+                                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+                            />
+                            {formik.touched.name && formik.errors.name ? <div className="error" style={{ color: 'red' }}>{formik.errors.name}</div> : null}
+    
+                            <label htmlFor="phoneNumber">Phone Number</label>
+                            <input
+                                type="text"
+                                name="phoneNumber"
+                                id="phoneNumber"
+                                value={formik.values.phoneNumber}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                placeholder="Phone Number"
+                                required
+                                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+                            />
+                            {formik.touched.phoneNumber && formik.errors.phoneNumber ? <div className="error" style={{ color: 'red' }}>{formik.errors.phoneNumber}</div> : null}
+    
+                            <label htmlFor="d_O_B">Date of Birth</label>
+                            <input
+                                type="date"
+                                name="d_O_B"
+                                id="d_O_B"
+                                value={formik.values.d_O_B}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                placeholder="Date of Birth"
+                                required
+                                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+                            />
+                            {formik.touched.d_O_B && formik.errors.d_O_B ? <div className="error" style={{ color: 'red' }}>{formik.errors.d_O_B}</div> : null}
+    
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                placeholder="Password"
+                                required
+                                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+                            />
+                            {formik.touched.password && formik.errors.password ? <div className="error" style={{ color: 'red' }}>{formik.errors.password}</div> : null}
+    
+                            <label htmlFor="answer">Name of Your Primary School</label>
+                            <input
+                                type="text"
+                                name="answer"
+                                id="answer"
+                                value={formik.values.answer}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                placeholder="Answer"
+                                required
+                                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+                            />
+                            {formik.touched.answer && formik.errors.answer ? <div className="error" style={{ color: 'red' }}>{formik.errors.answer}</div> : null}
+    
+                            <label htmlFor="roleofUser">Role of User</label>
+                            <select
+                                name="roleofUser"
+                                id="roleofUser"
+                                value={formik.values.roleofUser}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="dropdown"
+                                required
+                                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+                            >
+                                <option value="" label="Select role" />
+                                <option value="o" label="Owner" />
+                                <option value="t" label="Tenant" />
+                            </select>
+                            {formik.touched.roleofUser && formik.errors.roleofUser ? <div className="error" style={{ color: 'red' }}>{formik.errors.roleofUser}</div> : null}
+    
+                            <button type="submit" style={{ backgroundColor: '#007bff', color: '#fff', padding: '10px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Register</button>
+                            <button type="button" onClick={formik.resetForm} style={{ backgroundColor: '#6c757d', color: '#fff', padding: '10px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Reset</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            {/* <div id="not"><AllProperties/></div> */}
+            
+        </main>
     );
-   
+    
+    
 };
  
 export default RegistrationForm;
